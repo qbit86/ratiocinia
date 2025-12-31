@@ -1,0 +1,9 @@
+.artifacts/
+.DS_Store
+.vs/
+.vscode/
+*.local.json
+*.suo
+*.user
+bin/
+obj/
