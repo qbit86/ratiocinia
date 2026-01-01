@@ -24,5 +24,23 @@ namespace Ratiocinia.Algorithms.Specialized
             BigInteger rightDenominator) =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
+
+        public static (T Numerator, T Denominator) Multiply<T>(
+            T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
+            where T :
+            IAdditionOperators<T, T, T>,
+            IAdditiveIdentity<T, T>,
+            IDivisionOperators<T, T, T>,
+            IEquatable<T>,
+            IModulusOperators<T, T, T>,
+            IMultiplyOperators<T, T, T> =>
+            RationalOperations.Multiply(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberUncheckedPolicy<T>.Instance);
+
+        public static (BigInteger Numerator, BigInteger Denominator) Multiply(
+            BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
+            BigInteger rightDenominator) =>
+            RationalOperations.Multiply(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
     }
 }
