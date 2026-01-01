@@ -2,16 +2,13 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
 
-    public interface IBigIntegerPolicy :
+    public sealed class BigIntegerPolicy :
         IPartialNumberUncheckedPolicy<BigInteger>,
         IGreatestCommonDivisorFunctions<BigInteger>
     {
+        public static BigIntegerPolicy Instance { get; } = new();
+
         BigInteger IGreatestCommonDivisorFunctions<BigInteger>.Gcd(BigInteger left, BigInteger right) =>
             BigInteger.GreatestCommonDivisor(left, right);
-    }
-
-    public sealed class BigIntegerPolicy : IBigIntegerPolicy
-    {
-        public static BigIntegerPolicy Instance { get; } = new();
     }
 }
