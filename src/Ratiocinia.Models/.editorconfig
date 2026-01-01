@@ -1,0 +1,3 @@
+[*.cs]
+dotnet_diagnostic.CA1000.severity = none # Do not declare static members on generic types
+dotnet_diagnostic.CA1033.severity = none # Interface methods should be callable by child types
