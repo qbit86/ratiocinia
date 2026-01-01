@@ -1,5 +1,6 @@
 ﻿namespace Ratiocinia.Algorithms.Specialized
 {
+    using System;
     using System.Numerics;
     using Generic;
     using Models;
@@ -10,7 +11,10 @@
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
             where T :
             IAdditionOperators<T, T, T>,
+            IAdditiveIdentity<T, T>,
             IDivisionOperators<T, T, T>,
+            IEquatable<T>,
+            IModulusOperators<T, T, T>,
             IMultiplyOperators<T, T, T> =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberCheckedPolicy<T>.Instance);
