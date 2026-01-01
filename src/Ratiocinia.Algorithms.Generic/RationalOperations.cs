@@ -4,7 +4,10 @@
     {
         public static (T Numerator, T Denominator) Add<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
-            where TPolicy : IAdditionFunctions<T>, IDivisionFunctions<T>, IMultiplyFunctions<T>,
+            where TPolicy :
+            IAdditionFunctions<T>,
+            IDivisionFunctions<T>,
+            IMultiplyFunctions<T>,
             IGreatestCommonDivisorFunctions<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L517
