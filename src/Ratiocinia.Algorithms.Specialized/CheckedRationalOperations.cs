@@ -1,9 +1,9 @@
-namespace Ratiocinia.Algorithms.Specialized
+﻿namespace Ratiocinia.Algorithms.Specialized
 {
     using System.Numerics;
     using Models;
 
-    public static class RationalOperations
+    public static class CheckedRationalOperations
     {
         public static (T Numerator, T Denominator) Add<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -13,11 +13,5 @@ namespace Ratiocinia.Algorithms.Specialized
             IMultiplyOperators<T, T, T> =>
             Generic.RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberCheckedPolicy<T>.Instance);
-
-        public static (BigInteger Numerator, BigInteger Denominator) Add(
-            BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
-            BigInteger rightDenominator) =>
-            Generic.RationalOperations.Add(
-                leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
     }
 }
