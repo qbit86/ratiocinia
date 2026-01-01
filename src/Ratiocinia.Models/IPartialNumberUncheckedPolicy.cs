@@ -2,7 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
 
-    public interface IPartialNumberPolicy<T> :
+    public interface IPartialNumberUncheckedPolicy<T> :
         IAdditionFunctions<T>,
         IDivisionFunctions<T>,
         IMultiplyFunctions<T>

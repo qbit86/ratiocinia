@@ -3,7 +3,7 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public interface IBigIntegerPolicy :
-        IPartialNumberPolicy<BigInteger>,
+        IPartialNumberUncheckedPolicy<BigInteger>,
         IGreatestCommonDivisorFunctions<BigInteger>
     {
         BigInteger IGreatestCommonDivisorFunctions<BigInteger>.Gcd(BigInteger left, BigInteger right) =>

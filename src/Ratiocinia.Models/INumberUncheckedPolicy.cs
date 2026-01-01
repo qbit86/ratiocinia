@@ -3,8 +3,8 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public interface INumberPolicy<T> :
-        IPartialNumberPolicy<T>,
+    public interface INumberUncheckedPolicy<T> :
+        IPartialNumberUncheckedPolicy<T>,
         IGreatestCommonDivisorFunctions<T>
         where T :
         IAdditionOperators<T, T, T>,
@@ -14,12 +14,12 @@ namespace Ratiocinia.Models
         T IGreatestCommonDivisorFunctions<T>.Gcd(T left, T right) => throw new NotImplementedException();
     }
 
-    public sealed class NumberPolicy<T> : INumberPolicy<T>
+    public sealed class NumberUncheckedPolicy<T> : INumberUncheckedPolicy<T>
         where T :
         IAdditionOperators<T, T, T>,
         IDivisionOperators<T, T, T>,
         IMultiplyOperators<T, T, T>
     {
-        public static NumberPolicy<T> Instance { get; } = new();
+        public static NumberUncheckedPolicy<T> Instance { get; } = new();
     }
 }
