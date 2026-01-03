@@ -12,10 +12,13 @@ namespace Ratiocinia.Algorithms.Specialized
             where T :
             IAdditionOperators<T, T, T>,
             IAdditiveIdentity<T, T>,
+            IComparisonOperators<T, T, bool>,
             IDivisionOperators<T, T, T>,
             IEquatable<T>,
             IModulusOperators<T, T, T>,
-            IMultiplyOperators<T, T, T> =>
+            IMultiplyOperators<T, T, T>,
+            ISubtractionOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberUncheckedPolicy<T>.Instance);
 
@@ -25,15 +28,39 @@ namespace Ratiocinia.Algorithms.Specialized
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
 
+        public static (T Numerator, T Denominator) Divide<T>(
+            T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
+            where T :
+            IAdditionOperators<T, T, T>,
+            IAdditiveIdentity<T, T>,
+            IComparisonOperators<T, T, bool>,
+            IDivisionOperators<T, T, T>,
+            IEquatable<T>,
+            IModulusOperators<T, T, T>,
+            IMultiplyOperators<T, T, T>,
+            ISubtractionOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
+            RationalOperations.Divide(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberUncheckedPolicy<T>.Instance);
+
+        public static (BigInteger Numerator, BigInteger Denominator) Divide(
+            BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
+            BigInteger rightDenominator) =>
+            RationalOperations.Divide(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
+
         public static (T Numerator, T Denominator) Multiply<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
             where T :
             IAdditionOperators<T, T, T>,
             IAdditiveIdentity<T, T>,
+            IComparisonOperators<T, T, bool>,
             IDivisionOperators<T, T, T>,
             IEquatable<T>,
             IModulusOperators<T, T, T>,
-            IMultiplyOperators<T, T, T> =>
+            IMultiplyOperators<T, T, T>,
+            ISubtractionOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
             RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberUncheckedPolicy<T>.Instance);
 
@@ -41,6 +68,27 @@ namespace Ratiocinia.Algorithms.Specialized
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
             RationalOperations.Multiply(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
+
+        public static (T Numerator, T Denominator) Subtract<T>(
+            T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
+            where T :
+            IAdditionOperators<T, T, T>,
+            IAdditiveIdentity<T, T>,
+            IComparisonOperators<T, T, bool>,
+            IDivisionOperators<T, T, T>,
+            IEquatable<T>,
+            IModulusOperators<T, T, T>,
+            IMultiplyOperators<T, T, T>,
+            ISubtractionOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
+            RationalOperations.Subtract(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator, NumberUncheckedPolicy<T>.Instance);
+
+        public static (BigInteger Numerator, BigInteger Denominator) Subtract(
+            BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
+            BigInteger rightDenominator) =>
+            RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
     }
 }
