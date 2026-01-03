@@ -12,12 +12,12 @@ namespace Ratiocinia.Models
     {
         public static BigIntegerPolicy Instance { get; } = new();
 
-        BigInteger IGreatestCommonDivisorFunctions<BigInteger>.Gcd(BigInteger left, BigInteger right) =>
-            BigInteger.GreatestCommonDivisor(left, right);
-
         BigInteger IAdditiveIdentity<BigInteger>.AdditiveIdentity => BigInteger.Zero;
 
         int IComparer<BigInteger>.Compare(BigInteger x, BigInteger y) => BigInteger.Compare(x, y);
+
+        BigInteger IGreatestCommonDivisorFunctions<BigInteger>.Gcd(BigInteger left, BigInteger right) =>
+            BigInteger.GreatestCommonDivisor(left, right);
 
         BigInteger IUnaryNegationFunctions<BigInteger>.Negate(BigInteger value) => -value;
     }
