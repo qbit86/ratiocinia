@@ -6,7 +6,7 @@ namespace Ratiocinia.Models
 
     public sealed class NumberUncheckedPolicy<T> :
         IPartialNumberUncheckedPolicy<T>,
-        IGreatestCommonDivisorFunctionsImplementation<T>,
+        INumberGreatestCommonDivisorFunctions<T>,
         IAdditiveIdentity<T>,
         IComparer<T>,
         IUnaryNegationFunctions<T>

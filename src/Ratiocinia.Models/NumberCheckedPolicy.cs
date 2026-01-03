@@ -6,7 +6,7 @@
 
     public sealed class NumberCheckedPolicy<T> :
         IPartialNumberCheckedPolicy<T>,
-        IGreatestCommonDivisorFunctionsImplementation<T>,
+        INumberGreatestCommonDivisorFunctions<T>,
         IAdditiveIdentity<T>,
         IComparer<T>,
         IUnaryNegationFunctions<T>
