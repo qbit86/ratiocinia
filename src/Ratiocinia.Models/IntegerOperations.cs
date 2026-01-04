@@ -17,6 +17,10 @@ namespace Ratiocinia.Models
             return Gcd(left, right, identity);
         }
 
+        internal static T GcdNumberBase<T>(T left, T right)
+            where T : IModulusOperators<T, T, T>, INumberBase<T> =>
+            Gcd(left, right, default(IsZeroEquatable<T>));
+
         private static T Gcd<T, TEquatable>(T left, T right, TEquatable identity)
             where T : IModulusOperators<T, T, T>
 #if NET9_0_OR_GREATER
@@ -45,5 +49,12 @@ namespace Ratiocinia.Models
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(T? other) => comparable.CompareTo(other) is 0;
+    }
+
+    file readonly struct IsZeroEquatable<T> : IEquatable<T>
+        where T : INumberBase<T>
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(T? other) => other is null || T.IsZero(other);
     }
 }
