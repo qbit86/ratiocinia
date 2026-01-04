@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public static class RationalOperations
     {
@@ -35,6 +36,9 @@
             IMultiplyFunctions<T>,
             IUnaryNegationFunctions<T>
         {
+            Debug.Assert(policy.Compare(policy.AdditiveIdentity, leftDenominator) is not 0);
+            Debug.Assert(policy.Compare(policy.AdditiveIdentity, rightDenominator) is not 0);
+
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L586
             if (policy.Compare(rightNumerator, policy.AdditiveIdentity) is 0)
                 throw new ArgumentOutOfRangeException(nameof(rightNumerator));
