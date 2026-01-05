@@ -1,13 +1,11 @@
 namespace Ratiocinia.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.Numerics;
 
     public sealed class NumberUncheckedDivisionPolicy<T> :
         IComparableNumberGreatestCommonDivisorFunctions<T>,
-        IComparer<T>,
-        INumberAdditiveIdentity<T>,
+        IComparable<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,
         IUncheckedUnaryNegationFunctions<T>
@@ -21,6 +19,6 @@ namespace Ratiocinia.Models
     {
         public static NumberUncheckedDivisionPolicy<T> Instance { get; } = new();
 
-        int IComparer<T>.Compare(T? x, T? y) => Comparer<T>.Default.Compare(x, y);
+        int IComparable<T>.CompareTo(T? other) => T.AdditiveIdentity.CompareTo(other);
     }
 }

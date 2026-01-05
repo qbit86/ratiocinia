@@ -1,16 +1,14 @@
 namespace Ratiocinia.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.Numerics;
 
     public sealed class NumberCheckedDivisionPolicy<T> :
         ICheckedDivisionFunctions<T>,
         ICheckedMultiplyFunctions<T>,
         ICheckedUnaryNegationFunctions<T>,
-        IComparableNumberGreatestCommonDivisorFunctions<T>,
-        IComparer<T>,
-        INumberAdditiveIdentity<T>
+        IComparable<T>,
+        IComparableNumberGreatestCommonDivisorFunctions<T>
         where T :
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
@@ -21,6 +19,6 @@ namespace Ratiocinia.Models
     {
         public static NumberCheckedDivisionPolicy<T> Instance { get; } = new();
 
-        int IComparer<T>.Compare(T? x, T? y) => Comparer<T>.Default.Compare(x, y);
+        int IComparable<T>.CompareTo(T? other) => T.AdditiveIdentity.CompareTo(other);
     }
 }
