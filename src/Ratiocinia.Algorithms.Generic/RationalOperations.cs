@@ -1,7 +1,6 @@
 ﻿namespace Ratiocinia.Algorithms.Generic
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
 
     public static class RationalOperations
@@ -29,20 +28,19 @@
         public static (T Numerator, T Denominator) Divide<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
-            IAdditiveIdentity<T>,
-            IComparer<T>,
+            IComparable<T>,
             IDivisionFunctions<T>,
             IGreatestCommonDivisorFunctions<T>,
             IMultiplyFunctions<T>,
             IUnaryNegationFunctions<T>
         {
-            Debug.Assert(policy.Compare(policy.AdditiveIdentity, leftDenominator) is not 0);
-            Debug.Assert(policy.Compare(policy.AdditiveIdentity, rightDenominator) is not 0);
+            Debug.Assert(policy.CompareTo(leftDenominator) < 0);
+            Debug.Assert(policy.CompareTo(rightDenominator) < 0);
 
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L586
-            if (policy.Compare(rightNumerator, policy.AdditiveIdentity) is 0)
+            if (policy.CompareTo(rightNumerator) is 0)
                 throw new ArgumentOutOfRangeException(nameof(rightNumerator));
-            if (policy.Compare(leftNumerator, policy.AdditiveIdentity) is 0)
+            if (policy.CompareTo(leftNumerator) is 0)
                 return (leftNumerator, leftDenominator);
 
             var gcd1 = policy.Gcd(leftNumerator, rightNumerator);
@@ -50,7 +48,7 @@
             var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightDenominator, gcd2));
             var denominator =
                 policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightNumerator, gcd1));
-            if (policy.Compare(denominator, policy.AdditiveIdentity) < 0)
+            if (policy.CompareTo(denominator) > 0)
             {
                 numerator = policy.Negate(numerator);
                 denominator = policy.Negate(denominator);
