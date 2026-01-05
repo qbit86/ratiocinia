@@ -4,10 +4,10 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class NumberUncheckedAdditionPolicy<T> :
-        IEquatableNumberGreatestCommonDivisorFunctions<T>,
         IUncheckedAdditionFunctions<T>,
         IUncheckedDivisionFunctions<T>,
-        IUncheckedMultiplyFunctions<T>
+        IUncheckedMultiplyFunctions<T>,
+        IEquatableNumberGreatestCommonDivisorFunctions<T>
         where T :
         IAdditionOperators<T, T, T>,
         IAdditiveIdentity<T, T>,
