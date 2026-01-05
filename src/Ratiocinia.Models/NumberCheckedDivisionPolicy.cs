@@ -4,10 +4,10 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class NumberCheckedDivisionPolicy<T> :
+        IAdditiveIdentityComparer<T>,
         ICheckedDivisionFunctions<T>,
         ICheckedMultiplyFunctions<T>,
         ICheckedUnaryNegationFunctions<T>,
-        IComparable<T>,
         IComparableNumberGreatestCommonDivisorFunctions<T>
         where T :
         IAdditiveIdentity<T, T>,
@@ -18,7 +18,5 @@ namespace Ratiocinia.Models
         IUnaryNegationOperators<T, T>
     {
         public static NumberCheckedDivisionPolicy<T> Instance { get; } = new();
-
-        int IComparable<T>.CompareTo(T? other) => T.AdditiveIdentity.CompareTo(other);
     }
 }
