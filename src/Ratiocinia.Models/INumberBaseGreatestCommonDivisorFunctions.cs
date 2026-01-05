@@ -5,6 +5,6 @@ namespace Ratiocinia.Models
     public interface INumberBaseGreatestCommonDivisorFunctions<T> : IGreatestCommonDivisorFunctions<T>
         where T : IModulusOperators<T, T, T>, INumberBase<T>
     {
-        T IGreatestCommonDivisorFunctions<T>.Gcd(T left, T right) => IntegerOperations.GcdNumberBase(left, right);
+        T IGreatestCommonDivisorFunctions<T>.Gcd(T left, T right) => GreatestCommonDivisor.GcdNumberBase(left, right);
     }
 }

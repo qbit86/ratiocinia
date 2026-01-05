@@ -6,6 +6,6 @@ namespace Ratiocinia.Models
     public interface IComparableNumberGreatestCommonDivisorFunctions<T> : IGreatestCommonDivisorFunctions<T>
         where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>
     {
-        T IGreatestCommonDivisorFunctions<T>.Gcd(T left, T right) => IntegerOperations.GcdComparable(left, right);
+        T IGreatestCommonDivisorFunctions<T>.Gcd(T left, T right) => GreatestCommonDivisor.GcdComparable(left, right);
     }
 }

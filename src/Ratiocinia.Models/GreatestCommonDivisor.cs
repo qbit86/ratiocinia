@@ -4,17 +4,30 @@ namespace Ratiocinia.Models
     using System.Numerics;
     using System.Runtime.CompilerServices;
 
-    internal static class IntegerOperations
+    internal static class GreatestCommonDivisor
     {
         internal static T GcdEquatable<T>(T left, T right)
             where T : IAdditiveIdentity<T, T>, IEquatable<T>, IModulusOperators<T, T, T> =>
             Gcd(left, right, T.AdditiveIdentity);
 
+        internal static T GcdEquatable<T, TEquatable>(T left, T right, TEquatable identity)
+            where T : IModulusOperators<T, T, T>
+            where TEquatable : IEquatable<T> =>
+            Gcd(left, right, identity);
+
         internal static T GcdComparable<T>(T left, T right)
             where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>
         {
-            ComparableEquatable<T> identity = new(T.AdditiveIdentity);
-            return Gcd(left, right, identity);
+            var equatable = ComparableEquatableFactory<T>.Create(T.AdditiveIdentity);
+            return Gcd(left, right, equatable);
+        }
+
+        internal static T GcdComparable<T, TComparable>(T left, T right, TComparable identity)
+            where T : IModulusOperators<T, T, T>
+            where TComparable : IComparable<T>
+        {
+            var equatable = ComparableEquatableFactory<T>.Create(identity);
+            return Gcd(left, right, equatable);
         }
 
         internal static T GcdNumberBase<T>(T left, T right)
@@ -40,12 +53,19 @@ namespace Ratiocinia.Models
         }
     }
 
+    file static class ComparableEquatableFactory<T>
+    {
+        internal static ComparableEquatable<T, TComparable> Create<TComparable>(TComparable comparable)
+            where TComparable : IComparable<T>
+            => new(comparable);
+    }
+
 #if NET9_0_OR_GREATER
-    file readonly ref struct ComparableEquatable<T>(T comparable) : IEquatable<T>
+    file readonly ref struct ComparableEquatable<T, TComparable>(TComparable comparable) : IEquatable<T>
 #else
-    file readonly struct ComparableEquatable<T>(T comparable) : IEquatable<T>
+    file readonly struct ComparableEquatable<T, TComparable>(TComparable comparable) : IEquatable<T>
 #endif
-        where T : IComparable<T>
+        where TComparable : IComparable<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(T? other) => comparable.CompareTo(other) is 0;
