@@ -4,11 +4,14 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class BigIntegerPolicy :
-        IPartialNumberUncheckedPolicy<BigInteger>,
-        IGreatestCommonDivisorFunctions<BigInteger>,
         IAdditiveIdentity<BigInteger>,
         IComparer<BigInteger>,
-        IUnaryNegationFunctions<BigInteger>
+        IGreatestCommonDivisorFunctions<BigInteger>,
+        IUnaryNegationFunctions<BigInteger>,
+        IUncheckedAdditionFunctions<BigInteger>,
+        IUncheckedDivisionFunctions<BigInteger>,
+        IUncheckedSubtractionFunctions<BigInteger>,
+        IUncheckedMultiplyFunctions<BigInteger>
     {
         public static BigIntegerPolicy Instance { get; } = new();
 
