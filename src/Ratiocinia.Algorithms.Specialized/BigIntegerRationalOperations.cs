@@ -35,6 +35,16 @@ namespace Ratiocinia.Algorithms.Specialized
             BigInteger numerator, BigInteger denominator) =>
             RationalOperations.Negate(numerator, denominator, BigIntegerPolicy.Instance);
 
+        public static (BigInteger Numerator, BigInteger Denominator) Normalize(
+            BigInteger numerator, BigInteger denominator) =>
+            RationalOperations.Normalize(
+                numerator,
+                denominator,
+                BigInteger.Zero,
+                BigInteger.One,
+                BigInteger.Zero,
+                BigIntegerPolicy.Instance);
+
         public static bool IsNormalized(BigInteger numerator, BigInteger denominator) =>
             RationalOperations.IsNormalized(
                 numerator, denominator, BigInteger.Zero, BigInteger.One, BigIntegerPolicy.Instance);
