@@ -169,8 +169,7 @@
             IAdditionFunctions<T>,
             IComparer<T>,
             IDecrementFunctions<T>,
-            IDivisionFunctions<T>,
-            IModulusFunctions<T>
+            IDivRemFunctions<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L785
             // Uses continued fraction expansion via Euclidean algorithm to avoid overflow
@@ -180,15 +179,12 @@
             Debug.Assert(policy.Compare(additiveIdentity, rightDenominator) < 0);
 
             // Initialize continued fraction state for both operands
-            ContinuedFractionState<T> left = new(
-                leftDenominator,
-                policy.Divide(leftNumerator, leftDenominator),
-                policy.Modulus(leftNumerator, leftDenominator));
 
-            ContinuedFractionState<T> right = new(
-                rightDenominator,
-                policy.Divide(rightNumerator, rightDenominator),
-                policy.Modulus(rightNumerator, rightDenominator));
+            var (leftQuotient, leftRemainder) = policy.DivRem(leftNumerator, leftDenominator);
+            ContinuedFractionState<T> left = new(leftDenominator, leftQuotient, leftRemainder);
+
+            var (rightQuotient, rightRemainder) = policy.DivRem(rightNumerator, rightDenominator);
+            ContinuedFractionState<T> right = new(rightDenominator, rightQuotient, rightRemainder);
 
             // Tracks whether a comparison direction should be reversed.
             // Each iteration effectively computes reciprocals, flipping the comparison sense.
@@ -246,15 +242,11 @@
 
                 // Advance to the next continued fraction term: swap numerator with denominator,
                 // and denominator with the remainder (Euclidean algorithm step)
-                left = new ContinuedFractionState<T>(
-                    left.Remainder,
-                    policy.Divide(left.Denominator, left.Remainder),
-                    policy.Modulus(left.Denominator, left.Remainder));
+                var (nextLeftQuotient, nextLeftRemainder) = policy.DivRem(left.Denominator, left.Remainder);
+                left = new ContinuedFractionState<T>(left.Remainder, nextLeftQuotient, nextLeftRemainder);
 
-                right = new ContinuedFractionState<T>(
-                    right.Remainder,
-                    policy.Divide(right.Denominator, right.Remainder),
-                    policy.Modulus(right.Denominator, right.Remainder));
+                var (nextRightQuotient, nextRightRemainder) = policy.DivRem(right.Denominator, right.Remainder);
+                right = new ContinuedFractionState<T>(right.Remainder, nextRightQuotient, nextRightRemainder);
             }
         }
     }
