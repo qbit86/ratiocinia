@@ -1,6 +1,7 @@
 ﻿namespace Ratiocinia.Algorithms.Generic
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     public static class RationalOperations
@@ -115,6 +116,7 @@
             IGreatestCommonDivisorFunctions<T>,
             IUnaryNegationFunctions<T>
         {
+            // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L886
             if (additiveIdentityComparable.CompareTo(denominator) is 0)
                 throw new ArgumentOutOfRangeException(nameof(denominator));
 
@@ -155,5 +157,120 @@
             var abs = policy.Abs(gcd);
             return multiplicativeIdentity.Equals(abs);
         }
+
+        public static bool LessThan<T, TPolicy>(
+            T leftNumerator,
+            T leftDenominator,
+            T rightNumerator,
+            T rightDenominator,
+            T additiveIdentity,
+            TPolicy policy)
+            where TPolicy :
+            IAdditionFunctions<T>,
+            IComparer<T>,
+            IDecrementFunctions<T>,
+            IDivisionFunctions<T>,
+            IModulusFunctions<T>
+        {
+            // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L785
+            // Uses continued fraction expansion via Euclidean algorithm to avoid overflow
+            // that would occur with direct cross-multiplication comparison.
+
+            Debug.Assert(policy.Compare(additiveIdentity, leftDenominator) < 0);
+            Debug.Assert(policy.Compare(additiveIdentity, rightDenominator) < 0);
+
+            // Initialize continued fraction state for both operands
+            ContinuedFractionState<T> left = new(
+                leftDenominator,
+                policy.Divide(leftNumerator, leftDenominator),
+                policy.Modulus(leftNumerator, leftDenominator));
+
+            ContinuedFractionState<T> right = new(
+                rightDenominator,
+                policy.Divide(rightNumerator, rightDenominator),
+                policy.Modulus(rightNumerator, rightDenominator));
+
+            // Tracks whether a comparison direction should be reversed.
+            // Each iteration effectively computes reciprocals, flipping the comparison sense.
+            bool reverseComparison = false;
+
+            // Normalize negative remainders to ensure a consistent comparison.
+            // For negative numerators, modulus may yield negative remainders.
+            while (policy.Compare(left.Remainder, additiveIdentity) < 0)
+            {
+                left = left with
+                {
+                    Quotient = policy.Decrement(left.Quotient),
+                    Remainder = policy.Add(left.Remainder, left.Denominator)
+                };
+            }
+
+            while (policy.Compare(right.Remainder, additiveIdentity) < 0)
+            {
+                right = right with
+                {
+                    Quotient = policy.Decrement(right.Quotient),
+                    Remainder = policy.Add(right.Remainder, right.Denominator)
+                };
+            }
+
+            // Compare continued fraction components iteratively
+            while (true)
+            {
+                int quotientComparison = policy.Compare(left.Quotient, right.Quotient);
+                if (quotientComparison != 0)
+                {
+                    // Quotients differ - comparison result depends on reversal state
+                    return reverseComparison
+                        ? quotientComparison > 0
+                        : quotientComparison < 0;
+                }
+
+                // Quotients are equal - flip comparison direction for next iteration
+                reverseComparison = !reverseComparison;
+
+                // If either remainder is zero, one fraction terminates
+                bool leftRemainderIsZero = policy.Compare(left.Remainder, additiveIdentity) is 0;
+                bool rightRemainderIsZero = policy.Compare(right.Remainder, additiveIdentity) is 0;
+                if (leftRemainderIsZero || rightRemainderIsZero)
+                {
+                    // At least one continued fraction expansion has ended.
+                    // Boost logic:
+                    // - If both ended here, the values are equal => false
+                    // - Otherwise, the one that still has terms is smaller/larger depending on parity (reverseComparison)
+                    if (leftRemainderIsZero && rightRemainderIsZero)
+                        return false;
+
+                    return !leftRemainderIsZero != reverseComparison;
+                }
+
+                // Advance to the next continued fraction term: swap numerator with denominator,
+                // and denominator with the remainder (Euclidean algorithm step)
+                left = new ContinuedFractionState<T>(
+                    left.Remainder,
+                    policy.Divide(left.Denominator, left.Remainder),
+                    policy.Modulus(left.Denominator, left.Remainder));
+
+                right = new ContinuedFractionState<T>(
+                    right.Remainder,
+                    policy.Divide(right.Denominator, right.Remainder),
+                    policy.Modulus(right.Denominator, right.Remainder));
+            }
+        }
     }
+
+    /// <summary>
+    /// Represents the state of a continued fraction expansion during rational comparison.
+    /// Used by the Euclidean algorithm to iteratively decompose fractions.
+    /// </summary>
+    /// <typeparam name="T">The integer type used for numerator and denominator.</typeparam>
+    /// <param name="Denominator">
+    /// Current denominator in the Euclidean algorithm step. (The current numerator is always the previous step's denominator.)
+    /// </param>
+    /// <param name="Quotient">Integer part of the current fraction (Numerator / Denominator).</param>
+    /// <param name="Remainder">Fractional part remainder (Numerator % Denominator).</param>
+    file readonly record struct ContinuedFractionState<T>(
+        T Denominator,
+        T Quotient,
+        T Remainder);
 }
