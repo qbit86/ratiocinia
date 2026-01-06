@@ -58,4 +58,70 @@ public sealed class CheckedAndUncheckedRationalOperationsTests
         Assert.Equal(int.MinValue, n);
         Assert.Equal(1, d);
     }
+
+    [Fact]
+    public void Checked_Normalize_with_denominator_zero_throws()
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => CheckedRationalOperations.Normalize(1, 0));
+        Assert.Equal("denominator", ex.ParamName);
+    }
+
+    [Fact]
+    public void Unchecked_Normalize_with_denominator_zero_throws()
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => UncheckedRationalOperations.Normalize(1, 0));
+        Assert.Equal("denominator", ex.ParamName);
+    }
+
+    [Fact]
+    public void Checked_Normalize_reduces_by_gcd()
+    {
+        (int n, int d) = CheckedRationalOperations.Normalize(2, 4);
+        Assert.Equal(1, n);
+        Assert.Equal(2, d);
+    }
+
+    [Fact]
+    public void Unchecked_Normalize_reduces_by_gcd()
+    {
+        (int n, int d) = UncheckedRationalOperations.Normalize(2, 4);
+        Assert.Equal(1, n);
+        Assert.Equal(2, d);
+    }
+
+    [Fact]
+    public void Checked_Normalize_with_numerator_zero_returns_zero_over_one()
+    {
+        (int n, int d) = CheckedRationalOperations.Normalize(0, 7);
+        Assert.Equal(0, n);
+        Assert.Equal(1, d);
+    }
+
+    [Fact]
+    public void Unchecked_Normalize_with_numerator_zero_returns_zero_over_one()
+    {
+        (int n, int d) = UncheckedRationalOperations.Normalize(0, 7);
+        Assert.Equal(0, n);
+        Assert.Equal(1, d);
+    }
+
+    [Fact]
+    public void Checked_Normalize_normalizes_sign_to_keep_denominator_positive()
+    {
+        (int n, int d) = CheckedRationalOperations.Normalize(1, -2);
+        Assert.Equal(-1, n);
+        Assert.Equal(2, d);
+    }
+
+    [Fact]
+    public void Unchecked_Normalize_normalizes_sign_to_keep_denominator_positive()
+    {
+        (int n, int d) = UncheckedRationalOperations.Normalize(1, -2);
+        Assert.Equal(-1, n);
+        Assert.Equal(2, d);
+    }
+
+    [Fact]
+    public void Checked_Normalize_overflow_throws()
+        => Assert.Throws<OverflowException>(() => CheckedRationalOperations.Normalize(1, int.MinValue));
 }

@@ -10,8 +10,8 @@ public sealed class BigIntegerRationalOperationsTests
     public void Add_reduces_result()
     {
         var (n, d) = BigIntegerRationalOperations.Add(1, 2, 1, 2);
-        Assert.Equal(new BigInteger(1), n);
-        Assert.Equal(new BigInteger(1), d);
+        Assert.Equal(BigInteger.One, n);
+        Assert.Equal(BigInteger.One, d);
     }
 
     [Fact]
@@ -61,5 +61,36 @@ public sealed class BigIntegerRationalOperationsTests
         var (n, d) = BigIntegerRationalOperations.Negate(new BigInteger(3), new BigInteger(7));
         Assert.Equal(new BigInteger(-3), n);
         Assert.Equal(new BigInteger(7), d);
+    }
+
+    [Fact]
+    public void Normalize_with_denominator_zero_throws()
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => BigIntegerRationalOperations.Normalize(1, 0));
+        Assert.Equal("denominator", ex.ParamName);
+    }
+
+    [Fact]
+    public void Normalize_with_numerator_zero_returns_zero_over_one()
+    {
+        var (n, d) = BigIntegerRationalOperations.Normalize(0, 7);
+        Assert.Equal(BigInteger.Zero, n);
+        Assert.Equal(BigInteger.One, d);
+    }
+
+    [Fact]
+    public void Normalize_reduces_by_gcd()
+    {
+        var (n, d) = BigIntegerRationalOperations.Normalize(2, 4);
+        Assert.Equal(new BigInteger(1), n);
+        Assert.Equal(new BigInteger(2), d);
+    }
+
+    [Fact]
+    public void Normalize_normalizes_sign_to_keep_denominator_positive()
+    {
+        var (n, d) = BigIntegerRationalOperations.Normalize(1, -2);
+        Assert.Equal(new BigInteger(-1), n);
+        Assert.Equal(new BigInteger(2), d);
     }
 }
