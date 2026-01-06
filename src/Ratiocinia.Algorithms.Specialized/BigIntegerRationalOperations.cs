@@ -30,5 +30,9 @@ namespace Ratiocinia.Algorithms.Specialized
             BigInteger rightDenominator) =>
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
+
+        public static bool IsNormalized(BigInteger numerator, BigInteger denominator) =>
+            RationalOperations.IsNormalized(
+                numerator, denominator, BigInteger.Zero, BigInteger.One, BigIntegerPolicy.Instance);
     }
 }
