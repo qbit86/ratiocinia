@@ -11,12 +11,15 @@ namespace Ratiocinia.Algorithms.Specialized
             where T : IAdditiveIdentity<T, T>, IComparable<T>, IEquatable<T>,
             IModulusOperators<T, T, T>, IMultiplicativeIdentity<T, T>, INumberBase<T>
         {
-            Policy<T> policy = default;
+            var policy = Policy<T>.Instance;
             return RationalOperations.IsNormalized(
                 numerator, denominator, T.AdditiveIdentity, T.MultiplicativeIdentity, policy);
         }
     }
 
-    file readonly struct Policy<T> : INumberBaseGreatestCommonDivisorFunctions<T>, INumberBaseAbsoluteFunctions<T>
-        where T : IModulusOperators<T, T, T>, INumberBase<T>;
+    file sealed class Policy<T> : INumberBaseGreatestCommonDivisorFunctions<T>, INumberBaseAbsoluteFunctions<T>
+        where T : IModulusOperators<T, T, T>, INumberBase<T>
+    {
+        internal static Policy<T> Instance { get; } = new();
+    }
 }
