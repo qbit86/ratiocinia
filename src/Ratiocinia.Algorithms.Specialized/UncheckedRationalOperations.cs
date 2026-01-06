@@ -62,5 +62,21 @@ namespace Ratiocinia.Algorithms.Specialized
         public static (T Numerator, T Denominator) Negate<T>(T numerator, T denominator)
             where T : IUnaryNegationOperators<T, T> =>
             RationalOperations.Negate(numerator, denominator, UncheckedUnaryNegationPolicy<T>.Instance);
+
+        public static (T Numerator, T Denominator) Normalize<T>(T numerator, T denominator)
+            where T :
+            IAdditiveIdentity<T, T>,
+            IDivisionOperators<T, T, T>,
+            IComparable<T>,
+            IModulusOperators<T, T, T>,
+            IMultiplicativeIdentity<T, T>,
+            IUnaryNegationOperators<T, T> =>
+            RationalOperations.Normalize(
+                numerator,
+                denominator,
+                T.AdditiveIdentity,
+                T.MultiplicativeIdentity,
+                T.AdditiveIdentity,
+                UncheckedNormalizePolicy<T>.Instance);
     }
 }
