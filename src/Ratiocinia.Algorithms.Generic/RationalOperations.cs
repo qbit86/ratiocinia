@@ -106,7 +106,7 @@
             TPolicy policy)
             where TAdditiveIdentity : IComparable<T>
             where TMultiplicativeIdentity : IEquatable<T>
-            where TPolicy : IGreatestCommonDivisorFunctions<T>
+            where TPolicy : IAbsoluteFunctions<T>, IGreatestCommonDivisorFunctions<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L430
             if (additiveIdentity.CompareTo(denominator) >= 0)
@@ -115,7 +115,9 @@
             if (additiveIdentity.CompareTo(numerator) is 0 && !multiplicativeIdentity.Equals(denominator))
                 return false;
 
-            throw new NotImplementedException();
+            var gcd = policy.Gcd(numerator, denominator);
+            var abs = policy.Abs(gcd);
+            return multiplicativeIdentity.Equals(abs);
         }
     }
 }
