@@ -48,5 +48,12 @@ namespace Ratiocinia.Algorithms.Specialized
         public static bool IsNormalized(BigInteger numerator, BigInteger denominator) =>
             RationalOperations.IsNormalized(
                 numerator, denominator, BigInteger.Zero, BigInteger.One, BigIntegerPolicy.Instance);
+
+        public static bool LessThan(
+            BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
+            BigInteger rightDenominator) =>
+            RationalOperations.LessThan(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator,
+                BigInteger.Zero, BigIntegerPolicy.Instance);
     }
 }
