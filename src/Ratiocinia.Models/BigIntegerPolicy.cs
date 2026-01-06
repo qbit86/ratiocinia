@@ -4,6 +4,7 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class BigIntegerPolicy :
+        IBinaryDivRemFunctions<BigInteger>,
         IComparer<BigInteger>,
         IGreatestCommonDivisorFunctions<BigInteger>,
         INumberBaseAbsoluteFunctions<BigInteger>,
