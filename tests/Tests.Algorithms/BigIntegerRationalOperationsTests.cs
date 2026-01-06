@@ -54,4 +54,12 @@ public sealed class BigIntegerRationalOperationsTests
     [InlineData(1, -2, false)]
     public void IsNormalized_matches_expected(BigInteger numerator, BigInteger denominator, bool expected)
         => Assert.Equal(expected, BigIntegerRationalOperations.IsNormalized(numerator, denominator));
+
+    [Fact]
+    public void Negate_flips_numerator_and_keeps_denominator()
+    {
+        var (n, d) = BigIntegerRationalOperations.Negate(new BigInteger(3), new BigInteger(7));
+        Assert.Equal(new BigInteger(-3), n);
+        Assert.Equal(new BigInteger(7), d);
+    }
 }

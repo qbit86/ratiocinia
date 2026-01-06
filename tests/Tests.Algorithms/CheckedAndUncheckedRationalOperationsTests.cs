@@ -46,4 +46,16 @@ public sealed class CheckedAndUncheckedRationalOperationsTests
         Assert.Equal(int.MinValue, n);
         Assert.Equal(1, d);
     }
+
+    [Fact]
+    public void Checked_Negate_overflow_throws() =>
+        Assert.Throws<OverflowException>(() => CheckedRationalOperations.Negate(int.MinValue, 1));
+
+    [Fact]
+    public void Unchecked_Negate_overflow_wraps()
+    {
+        (int n, int d) = UncheckedRationalOperations.Negate(int.MinValue, 1);
+        Assert.Equal(int.MinValue, n);
+        Assert.Equal(1, d);
+    }
 }
