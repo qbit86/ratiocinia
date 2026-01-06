@@ -42,14 +42,8 @@ namespace Ratiocinia.Models
             where TEquatable : IEquatable<T>
 #endif
         {
-            // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L414
-            // return identity.Equals(right) ? left : Gcd(right, left % right, identity);
-            while (true)
-            {
-                if (identity.Equals(right))
-                    return left;
-                (left, right) = (right, left % right);
-            }
+            NumberModulusFunctions<T> policy = default;
+            return Algorithms.Generic.GreatestCommonDivisor.Gcd(left, right, identity, policy);
         }
     }
 
@@ -77,4 +71,7 @@ namespace Ratiocinia.Models
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(T? other) => other is null || T.IsZero(other);
     }
+
+    file readonly struct NumberModulusFunctions<T> : INumberModulusFunctions<T>
+        where T : IModulusOperators<T, T, T> { }
 }
