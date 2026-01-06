@@ -1,9 +1,9 @@
 ﻿namespace Ratiocinia
 {
     using System;
+    using System.Globalization;
     using System.Numerics;
     using Algorithms.Specialized;
-    using static System.FormattableString;
 
     public readonly partial struct Rational<T>
         where T :
@@ -33,6 +33,6 @@
 
         public static Rational<T> Create(T numerator, T denominator) => throw new NotImplementedException();
 
-        public override string ToString() => Invariant($"{Numerator}/{Denominator}");
+        public override string ToString() => ToString(string.Empty, CultureInfo.InvariantCulture);
     }
 }
