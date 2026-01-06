@@ -78,5 +78,18 @@ namespace Ratiocinia.Algorithms.Specialized
                 T.MultiplicativeIdentity,
                 T.AdditiveIdentity,
                 UncheckedNormalizePolicy<T>.Instance);
+
+        public static bool LessThan<T>(
+            T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
+            where T :
+            IAdditionOperators<T, T, T>,
+            IAdditiveIdentity<T, T>,
+            IComparable<T>,
+            IDecrementOperators<T>,
+            IDivisionOperators<T, T, T>,
+            IModulusOperators<T, T, T> =>
+            RationalOperations.LessThan(
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator,
+                T.AdditiveIdentity, UncheckedLessThanPolicy<T>.Instance);
     }
 }
