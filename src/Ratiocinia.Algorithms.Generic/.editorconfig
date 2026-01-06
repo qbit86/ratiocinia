@@ -1,0 +1,3 @@
+[IsExternalInit.cs]
+dotnet_diagnostic.IDE0130.severity = none # Namespace does not match folder structure
+resharper_check_namespace_highlighting = none # CheckNamespace
