@@ -72,6 +72,5 @@ namespace Ratiocinia.Models
         public bool Equals(T? other) => other is null || T.IsZero(other);
     }
 
-    file readonly struct NumberModulusFunctions<T> : INumberModulusFunctions<T>
-        where T : IModulusOperators<T, T, T> { }
+    file readonly struct NumberModulusFunctions<T> : INumberModulusFunctions<T> where T : IModulusOperators<T, T, T>;
 }
