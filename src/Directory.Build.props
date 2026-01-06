@@ -13,7 +13,6 @@
     <VersionPrefix>0.1.0</VersionPrefix>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>$(RepoRoot)assets/ratiocinia.snk</AssemblyOriginatorKeyFile>
     <ContinuousIntegrationBuild Condition="'$(Configuration)' == 'Release'">true</ContinuousIntegrationBuild>
     <DebugType>portable</DebugType>
     <EnablePackageValidation>true</EnablePackageValidation>

@@ -3,6 +3,7 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode>All</AnalysisMode>
     <ArtifactsPath>$(MSBuildThisFileDirectory).artifacts/</ArtifactsPath>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)assets/ratiocinia.snk</AssemblyOriginatorKeyFile>
     <Deterministic>true</Deterministic>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
