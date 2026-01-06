@@ -4,7 +4,6 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class NumberUncheckedDivisionPolicy<T> :
-        IAdditiveIdentityComparer<T>,
         IComparableNumberGreatestCommonDivisorFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,

@@ -31,6 +31,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IUnaryNegationOperators<T, T> =>
             RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
+                T.AdditiveIdentity,
                 NumberUncheckedDivisionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Multiply<T>(

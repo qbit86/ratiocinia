@@ -31,7 +31,7 @@
             IUnaryNegationOperators<T, T> =>
             RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberCheckedDivisionPolicy<T>.Instance);
+                T.AdditiveIdentity, NumberCheckedDivisionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Multiply<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)

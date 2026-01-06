@@ -16,7 +16,8 @@ namespace Ratiocinia.Algorithms.Specialized
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
             RationalOperations.Divide(
-                leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
+                leftNumerator, leftDenominator, rightNumerator, rightDenominator,
+                BigInteger.Zero, BigIntegerPolicy.Instance);
 
         public static (BigInteger Numerator, BigInteger Denominator) Multiply(
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
