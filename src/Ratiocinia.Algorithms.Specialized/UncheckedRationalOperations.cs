@@ -58,5 +58,9 @@ namespace Ratiocinia.Algorithms.Specialized
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 UncheckedSubtractionPolicy<T>.Instance);
+
+        public static (T Numerator, T Denominator) Negate<T>(T numerator, T denominator)
+            where T : IUnaryNegationOperators<T, T> =>
+            RationalOperations.Negate(numerator, denominator, UncheckedUnaryNegationPolicy<T>.Instance);
     }
 }

@@ -57,5 +57,9 @@
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 CheckedSubtractionPolicy<T>.Instance);
+
+        public static (T Numerator, T Denominator) Negate<T>(T numerator, T denominator)
+            where T : IUnaryNegationOperators<T, T> =>
+            RationalOperations.Negate(numerator, denominator, CheckedUnaryNegationPolicy<T>.Instance);
     }
 }

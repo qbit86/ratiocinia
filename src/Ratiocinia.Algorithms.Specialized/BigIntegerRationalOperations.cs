@@ -31,6 +31,10 @@ namespace Ratiocinia.Algorithms.Specialized
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
 
+        public static (BigInteger Numerator, BigInteger Denominator) Negate(
+            BigInteger numerator, BigInteger denominator) =>
+            RationalOperations.Negate(numerator, denominator, BigIntegerPolicy.Instance);
+
         public static bool IsNormalized(BigInteger numerator, BigInteger denominator) =>
             RationalOperations.IsNormalized(
                 numerator, denominator, BigInteger.Zero, BigInteger.One, BigIntegerPolicy.Instance);
