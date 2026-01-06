@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ratiocinia.Algorithms.Specialized\Ratiocinia.Algorithms.Specialized.csproj" />
-    <ProjectReference Include="..\..\src\Ratiocinia.Models\Ratiocinia.Models.csproj" />
   </ItemGroup>
 
 </Project>
