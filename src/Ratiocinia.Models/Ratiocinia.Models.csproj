@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ratiocinia.Abstractions\Ratiocinia.Abstractions.csproj" />
+    <ProjectReference Include="..\Ratiocinia.Algorithms.Generic\Ratiocinia.Algorithms.Generic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
