@@ -8,8 +8,8 @@ namespace Ratiocinia.Algorithms.Specialized
     public static class NumericRationalOperations
     {
         public static bool IsNormalized<T>(T numerator, T denominator)
-            where T : IAdditiveIdentity<T, T>, IComparable<T>, IEquatable<T>, IModulusOperators<T, T, T>,
-            INumberBase<T>, IMultiplicativeIdentity<T, T>
+            where T : IAdditiveIdentity<T, T>, IComparable<T>, IEquatable<T>,
+            IModulusOperators<T, T, T>, IMultiplicativeIdentity<T, T>, INumberBase<T>
         {
             Policy<T> policy = default;
             return RationalOperations.IsNormalized(
