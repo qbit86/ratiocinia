@@ -102,6 +102,38 @@
             where TPolicy : IUnaryNegationFunctions<T> =>
             (policy.Negate(numerator), denominator);
 
+        public static (T Numerator, T Denominator) Normalize<T, TAdditiveIdentityComparable, TPolicy>(
+            T numerator,
+            T denominator,
+            T additiveIdentity,
+            T multiplicativeIdentity,
+            TAdditiveIdentityComparable additiveIdentityComparable,
+            TPolicy policy)
+            where TAdditiveIdentityComparable : IComparable<T>
+            where TPolicy :
+            IDivisionFunctions<T>,
+            IGreatestCommonDivisorFunctions<T>,
+            IUnaryNegationFunctions<T>
+        {
+            if (additiveIdentityComparable.CompareTo(denominator) is 0)
+                throw new ArgumentOutOfRangeException(nameof(denominator));
+
+            if (additiveIdentityComparable.CompareTo(numerator) is 0)
+                return (additiveIdentity, multiplicativeIdentity);
+
+            var gcd = policy.Gcd(numerator, denominator);
+            numerator = policy.Divide(numerator, gcd);
+            denominator = policy.Divide(denominator, gcd);
+
+            if (additiveIdentityComparable.CompareTo(denominator) > 0)
+            {
+                numerator = policy.Negate(numerator);
+                denominator = policy.Negate(denominator);
+            }
+
+            return (numerator, denominator);
+        }
+
         public static bool IsNormalized<T, TAdditiveIdentity, TMultiplicativeIdentity, TPolicy>(
             T numerator,
             T denominator,
