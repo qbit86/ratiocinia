@@ -4,13 +4,13 @@ namespace Ratiocinia.Models
     using System.Numerics;
 
     public sealed class CheckedLessThanPolicy<T> :
+        IBinaryDivRemFunctions<T>,
         ICheckedAdditionFunctions<T>,
         ICheckedDecrementFunctions<T>,
-        ICheckedDivisionFunctions<T>,
-        IComparableComparer<T>,
-        INumericModulusFunctions<T>
+        IComparableComparer<T>
         where T :
         IAdditionOperators<T, T, T>,
+        IBinaryInteger<T>,
         IComparable<T>,
         IDecrementOperators<T>,
         IDivisionOperators<T, T, T>,

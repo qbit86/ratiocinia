@@ -84,6 +84,7 @@ namespace Ratiocinia.Algorithms.Specialized
             where T :
             IAdditionOperators<T, T, T>,
             IAdditiveIdentity<T, T>,
+            IBinaryInteger<T>,
             IComparable<T>,
             IDecrementOperators<T>,
             IDivisionOperators<T, T, T>,
