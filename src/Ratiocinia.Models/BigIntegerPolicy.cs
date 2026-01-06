@@ -4,17 +4,15 @@ namespace Ratiocinia.Models
 
     public sealed class BigIntegerPolicy :
         IGreatestCommonDivisorFunctions<BigInteger>,
-        IUnaryNegationFunctions<BigInteger>,
+        INumberBaseAbsoluteFunctions<BigInteger>,
         IUncheckedAdditionFunctions<BigInteger>,
         IUncheckedDivisionFunctions<BigInteger>,
         IUncheckedSubtractionFunctions<BigInteger>,
-        IUncheckedMultiplyFunctions<BigInteger>
+        IUncheckedMultiplyFunctions<BigInteger>,
+        IUncheckedUnaryNegationFunctions<BigInteger>
     {
         public static BigIntegerPolicy Instance { get; } = new();
 
-        BigInteger IGreatestCommonDivisorFunctions<BigInteger>.Gcd(BigInteger left, BigInteger right) =>
-            BigInteger.GreatestCommonDivisor(left, right);
-
-        BigInteger IUnaryNegationFunctions<BigInteger>.Negate(BigInteger value) => -value;
+        public BigInteger Gcd(BigInteger left, BigInteger right) => BigInteger.GreatestCommonDivisor(left, right);
     }
 }
