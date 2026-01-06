@@ -1,3 +1,4 @@
 [*Benchmarks.cs]
 dotnet_diagnostic.CA1515.severity = none # Consider making public types internal
 dotnet_diagnostic.CA1822.severity = none # Mark members as static
+resharper_unused_auto_property_accessor_global_highlighting = hint # UnusedAutoPropertyAccessor.Global
