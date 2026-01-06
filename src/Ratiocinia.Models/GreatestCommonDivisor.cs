@@ -42,7 +42,7 @@ namespace Ratiocinia.Models
             where TEquatable : IEquatable<T>
 #endif
         {
-            NumberModulusFunctions<T> policy = default;
+            NumericModulusFunctions<T> policy = default;
             return Algorithms.Generic.GreatestCommonDivisor.Gcd(left, right, identity, policy);
         }
     }
@@ -72,5 +72,5 @@ namespace Ratiocinia.Models
         public bool Equals(T? other) => other is null || T.IsZero(other);
     }
 
-    file readonly struct NumberModulusFunctions<T> : INumberModulusFunctions<T> where T : IModulusOperators<T, T, T>;
+    file readonly struct NumericModulusFunctions<T> : INumericModulusFunctions<T> where T : IModulusOperators<T, T, T>;
 }

@@ -5,7 +5,7 @@ namespace Ratiocinia.Models
     public sealed class BigIntegerPolicy :
         IGreatestCommonDivisorFunctions<BigInteger>,
         INumberBaseAbsoluteFunctions<BigInteger>,
-        INumberModulusFunctions<BigInteger>,
+        INumericModulusFunctions<BigInteger>,
         IUncheckedAdditionFunctions<BigInteger>,
         IUncheckedDivisionFunctions<BigInteger>,
         IUncheckedSubtractionFunctions<BigInteger>,
