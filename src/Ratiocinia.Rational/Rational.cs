@@ -5,7 +5,7 @@
     using Algorithms.Specialized;
     using static System.FormattableString;
 
-    public readonly record struct Rational<T>
+    public readonly partial struct Rational<T>
         where T :
         IAdditiveIdentity<T, T>,
         IComparable<T>,
@@ -14,20 +14,20 @@
         IMultiplicativeIdentity<T, T>,
         INumberBase<T>
     {
+        private static readonly Rational<T> s_additiveIdentity = new(T.AdditiveIdentity, T.MultiplicativeIdentity);
+
         private Rational(T numerator, T denominator) => (Numerator, Denominator) = (numerator, denominator);
 
         public T Numerator { get; }
 
         public T Denominator { get; }
 
-        public static Rational<T> AdditiveIdentity { get; } = new(T.AdditiveIdentity, T.MultiplicativeIdentity);
-
         public static Rational<T> CreateUnsafe(T numerator, T denominator) => new(numerator, denominator);
 
         public static bool TryCreate(T numerator, T denominator, out Rational<T> rational)
         {
             bool result = NumericRationalOperations.IsNormalized(numerator, denominator);
-            rational = result ? new(numerator, denominator) : AdditiveIdentity;
+            rational = result ? new(numerator, denominator) : s_additiveIdentity;
             return result;
         }
 
