@@ -3,11 +3,11 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public sealed class NumberCheckedSubtractionPolicy<T> :
+    public sealed class CheckedSubtractionPolicy<T> :
         ICheckedDivisionFunctions<T>,
         ICheckedMultiplyFunctions<T>,
         ICheckedSubtractionFunctions<T>,
-        IEquatableNumberGreatestCommonDivisorFunctions<T>
+        IEquatableGreatestCommonDivisorFunctions<T>
         where T :
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
@@ -16,6 +16,6 @@ namespace Ratiocinia.Models
         IMultiplyOperators<T, T, T>,
         ISubtractionOperators<T, T, T>
     {
-        public static NumberCheckedSubtractionPolicy<T> Instance { get; } = new();
+        public static CheckedSubtractionPolicy<T> Instance { get; } = new();
     }
 }

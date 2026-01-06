@@ -3,8 +3,8 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public sealed class NumberUncheckedSubtractionPolicy<T> :
-        IEquatableNumberGreatestCommonDivisorFunctions<T>,
+    public sealed class UncheckedSubtractionPolicy<T> :
+        IEquatableGreatestCommonDivisorFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,
         IUncheckedSubtractionFunctions<T>
@@ -16,6 +16,6 @@ namespace Ratiocinia.Models
         IMultiplyOperators<T, T, T>,
         ISubtractionOperators<T, T, T>
     {
-        public static NumberUncheckedSubtractionPolicy<T> Instance { get; } = new();
+        public static UncheckedSubtractionPolicy<T> Instance { get; } = new();
     }
 }

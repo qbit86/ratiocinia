@@ -3,17 +3,19 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public sealed class NumberCheckedMultiplyPolicy<T> :
+    public sealed class CheckedAdditionPolicy<T> :
+        ICheckedAdditionFunctions<T>,
         ICheckedDivisionFunctions<T>,
         ICheckedMultiplyFunctions<T>,
-        IEquatableNumberGreatestCommonDivisorFunctions<T>
+        IEquatableGreatestCommonDivisorFunctions<T>
         where T :
+        IAdditionOperators<T, T, T>,
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
         IEquatable<T>,
         IModulusOperators<T, T, T>,
         IMultiplyOperators<T, T, T>
     {
-        public static NumberCheckedMultiplyPolicy<T> Instance { get; } = new();
+        public static CheckedAdditionPolicy<T> Instance { get; } = new();
     }
 }

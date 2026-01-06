@@ -18,7 +18,7 @@
             IMultiplyOperators<T, T, T> =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberCheckedAdditionPolicy<T>.Instance);
+                CheckedAdditionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Divide<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -31,7 +31,7 @@
             IUnaryNegationOperators<T, T> =>
             RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                T.AdditiveIdentity, NumberCheckedDivisionPolicy<T>.Instance);
+                T.AdditiveIdentity, CheckedDivisionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Multiply<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -43,7 +43,7 @@
             IMultiplyOperators<T, T, T> =>
             RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberCheckedMultiplyPolicy<T>.Instance);
+                CheckedMultiplyPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Subtract<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -56,6 +56,6 @@
             ISubtractionOperators<T, T, T> =>
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberCheckedSubtractionPolicy<T>.Instance);
+                CheckedSubtractionPolicy<T>.Instance);
     }
 }

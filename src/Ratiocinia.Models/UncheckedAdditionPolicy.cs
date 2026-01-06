@@ -3,11 +3,11 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public sealed class NumberUncheckedAdditionPolicy<T> :
+    public sealed class UncheckedAdditionPolicy<T> :
         IUncheckedAdditionFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,
-        IEquatableNumberGreatestCommonDivisorFunctions<T>
+        IEquatableGreatestCommonDivisorFunctions<T>
         where T :
         IAdditionOperators<T, T, T>,
         IAdditiveIdentity<T, T>,
@@ -16,6 +16,6 @@ namespace Ratiocinia.Models
         IModulusOperators<T, T, T>,
         IMultiplyOperators<T, T, T>
     {
-        public static NumberUncheckedAdditionPolicy<T> Instance { get; } = new();
+        public static UncheckedAdditionPolicy<T> Instance { get; } = new();
     }
 }

@@ -18,7 +18,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IMultiplyOperators<T, T, T> =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberUncheckedAdditionPolicy<T>.Instance);
+                UncheckedAdditionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Divide<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -32,7 +32,7 @@ namespace Ratiocinia.Algorithms.Specialized
             RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 T.AdditiveIdentity,
-                NumberUncheckedDivisionPolicy<T>.Instance);
+                UncheckedDivisionPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Multiply<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -44,7 +44,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IMultiplyOperators<T, T, T> =>
             RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberUncheckedMultiplyPolicy<T>.Instance);
+                UncheckedMultiplyPolicy<T>.Instance);
 
         public static (T Numerator, T Denominator) Subtract<T>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator)
@@ -57,6 +57,6 @@ namespace Ratiocinia.Algorithms.Specialized
             ISubtractionOperators<T, T, T> =>
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
-                NumberUncheckedSubtractionPolicy<T>.Instance);
+                UncheckedSubtractionPolicy<T>.Instance);
     }
 }

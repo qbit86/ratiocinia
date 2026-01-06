@@ -3,8 +3,8 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
-    public sealed class NumberUncheckedMultiplyPolicy<T> :
-        IEquatableNumberGreatestCommonDivisorFunctions<T>,
+    public sealed class UncheckedMultiplyPolicy<T> :
+        IEquatableGreatestCommonDivisorFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>
         where T :
@@ -14,6 +14,6 @@ namespace Ratiocinia.Models
         IModulusOperators<T, T, T>,
         IMultiplyOperators<T, T, T>
     {
-        public static NumberUncheckedMultiplyPolicy<T> Instance { get; } = new();
+        public static UncheckedMultiplyPolicy<T> Instance { get; } = new();
     }
 }
