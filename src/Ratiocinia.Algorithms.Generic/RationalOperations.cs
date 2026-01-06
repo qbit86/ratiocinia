@@ -98,6 +98,10 @@
             return (numerator, denominator);
         }
 
+        public static (T Numerator, T Denominator) Negate<T, TPolicy>(T numerator, T denominator, TPolicy policy)
+            where TPolicy : IUnaryNegationFunctions<T> =>
+            (policy.Negate(numerator), denominator);
+
         public static bool IsNormalized<T, TAdditiveIdentity, TMultiplicativeIdentity, TPolicy>(
             T numerator,
             T denominator,
