@@ -97,5 +97,25 @@
             var denominator = policy.Multiply(leftDenominator, policy.Divide(rightDenominator, gcd));
             return (numerator, denominator);
         }
+
+        public static bool IsNormalized<T, TAdditiveIdentity, TMultiplicativeIdentity, TPolicy>(
+            T numerator,
+            T denominator,
+            TAdditiveIdentity additiveIdentity,
+            TMultiplicativeIdentity multiplicativeIdentity,
+            TPolicy policy)
+            where TAdditiveIdentity : IComparable<T>
+            where TMultiplicativeIdentity : IEquatable<T>
+            where TPolicy : IGreatestCommonDivisorFunctions<T>
+        {
+            // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L430
+            if (additiveIdentity.CompareTo(denominator) >= 0)
+                return false;
+
+            if (additiveIdentity.CompareTo(numerator) is 0 && !multiplicativeIdentity.Equals(denominator))
+                return false;
+
+            throw new NotImplementedException();
+        }
     }
 }
