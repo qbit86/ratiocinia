@@ -7,6 +7,7 @@
 
     public readonly partial struct Rational<T>
         where T :
+        IBinaryInteger<T>,
         IComparable<T>,
         IModulusOperators<T, T, T>,
         INumberBase<T>
