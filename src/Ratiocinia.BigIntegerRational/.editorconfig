@@ -1,0 +1,2 @@
+[BigIntegerRational*.cs]
+resharper_member_can_be_private_global_highlighting = none # MemberCanBePrivate.Global
