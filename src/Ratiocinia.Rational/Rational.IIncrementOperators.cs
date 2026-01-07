@@ -1,0 +1,15 @@
+namespace Ratiocinia
+{
+    using System.Numerics;
+
+    partial struct Rational<T> : IIncrementOperators<Rational<T>>
+    {
+        public static Rational<T> operator ++(Rational<T> value) => Increment(value);
+
+        public static Rational<T> operator checked ++(Rational<T> value) =>
+            new(checked(value.Numerator + value.Denominator), value.Denominator);
+
+        public static Rational<T> Increment(Rational<T> value) =>
+            new(value.Numerator + value.Denominator, value.Denominator);
+    }
+}
