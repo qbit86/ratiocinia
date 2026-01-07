@@ -11,10 +11,6 @@ namespace Ratiocinia
             // NaN compares greater than any non-NaN
             if (Equals(other))
                 return 0;
-            if (IsDefault)
-                return 1;
-            if (other.IsDefault)
-                return -1;
 
             if (UncheckedRationalOperations.LessThan(Numerator, Denominator, other.Numerator, other.Denominator))
                 return -1;

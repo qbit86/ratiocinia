@@ -12,13 +12,15 @@
         IModulusOperators<T, T, T>,
         INumberBase<T>
     {
-        private Rational(T numerator, T denominator) => (Numerator, Denominator) = (numerator, denominator);
+        private Rational(T numerator, T denominator) => (Numerator, RawDenominator) = (numerator, denominator);
 
         public T Numerator { get; }
 
-        public T Denominator { get; }
+        private T RawDenominator { get; }
 
-        private bool IsDefault => T.AdditiveIdentity.CompareTo(Denominator) is 0;
+        public T Denominator => IsDefault ? T.One : RawDenominator;
+
+        private bool IsDefault => T.AdditiveIdentity.CompareTo(RawDenominator) is 0;
 
         private static Rational<T> UnsafeCreate(T numerator, T denominator) => new(numerator, denominator);
 

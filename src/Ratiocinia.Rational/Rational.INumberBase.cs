@@ -9,14 +9,14 @@ namespace Ratiocinia
     {
         public static Rational<T> Abs(Rational<T> value) => T.IsNegative(value.Numerator) ? -value : value;
 
-        public static bool IsCanonical(Rational<T> value) => !value.IsDefault;
+        public static bool IsCanonical(Rational<T> value) => true;
 
         public static bool IsComplexNumber(Rational<T> value) => false;
 
         public static bool IsEvenInteger(Rational<T> value) =>
             IsInteger(value) && T.IsEvenInteger(value.Numerator);
 
-        public static bool IsFinite(Rational<T> value) => !value.IsDefault;
+        public static bool IsFinite(Rational<T> value) => true;
 
         public static bool IsImaginaryNumber(Rational<T> value) => false;
 
@@ -24,7 +24,7 @@ namespace Ratiocinia
 
         public static bool IsInteger(Rational<T> value) => T.MultiplicativeIdentity.Equals(value.Denominator);
 
-        public static bool IsNaN(Rational<T> value) => value.IsDefault;
+        public static bool IsNaN(Rational<T> value) => false;
 
         public static bool IsNegative(Rational<T> value) => T.IsNegative(value.Numerator);
 
@@ -40,36 +40,20 @@ namespace Ratiocinia
 
         public static bool IsPositiveInfinity(Rational<T> value) => false;
 
-        public static bool IsRealNumber(Rational<T> value) => !value.IsDefault;
+        public static bool IsRealNumber(Rational<T> value) => true;
 
         public static bool IsSubnormal(Rational<T> value) => false;
 
-        public static bool IsZero(Rational<T> value) => !value.IsDefault && T.IsZero(value.Numerator);
+        public static bool IsZero(Rational<T> value) => T.IsZero(value.Numerator);
 
         public static Rational<T> MaxMagnitude(Rational<T> x, Rational<T> y) => CompareMagnitude(x, y) >= 0 ? x : y;
 
-        public static Rational<T> MaxMagnitudeNumber(Rational<T> x, Rational<T> y)
-        {
-            if (x.IsDefault)
-                return y;
-            if (y.IsDefault)
-                return x;
-
-            return MaxMagnitude(x, y);
-        }
+        public static Rational<T> MaxMagnitudeNumber(Rational<T> x, Rational<T> y) => MaxMagnitude(x, y);
 
         public static Rational<T> MinMagnitude(Rational<T> x, Rational<T> y) =>
             CompareMagnitude(x, y) <= 0 ? x : y;
 
-        public static Rational<T> MinMagnitudeNumber(Rational<T> x, Rational<T> y)
-        {
-            if (x.IsDefault)
-                return y;
-            if (y.IsDefault)
-                return x;
-
-            return MinMagnitude(x, y);
-        }
+        public static Rational<T> MinMagnitudeNumber(Rational<T> x, Rational<T> y) => MinMagnitude(x, y);
 
         public static Rational<T> Parse(string s, NumberStyles style, IFormatProvider? provider) =>
             Parse(s.AsSpan(), style, provider);
@@ -112,9 +96,6 @@ namespace Ratiocinia
         public static bool TryConvertToChecked<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (value.IsDefault)
-                return None(out result);
-
             // Checked conversion requires an integral value.
             if (!value.Denominator.Equals(T.MultiplicativeIdentity) &&
                 !T.IsZero(value.Numerator % value.Denominator))
@@ -127,9 +108,6 @@ namespace Ratiocinia
         public static bool TryConvertToSaturating<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (value.IsDefault)
-                return None(out result);
-
             var quotient = value.Numerator / value.Denominator;
             return TOther.TryConvertFromSaturating(quotient, out result);
         }
@@ -137,9 +115,6 @@ namespace Ratiocinia
         public static bool TryConvertToTruncating<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (value.IsDefault)
-                return None(out result);
-
             var quotient = value.Numerator / value.Denominator;
             return TOther.TryConvertFromTruncating(quotient, out result);
         }
