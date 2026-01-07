@@ -18,6 +18,8 @@
 
         public T Denominator { get; }
 
+        private bool IsDefault => T.AdditiveIdentity.CompareTo(Denominator) is 0;
+
         public static Rational<T> CreateUnsafe(T numerator, T denominator) => new(numerator, denominator);
 
         public static bool TryCreate(T numerator, T denominator, out Rational<T> rational)
