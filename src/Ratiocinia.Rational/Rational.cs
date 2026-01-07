@@ -20,12 +20,12 @@
 
         private bool IsDefault => T.AdditiveIdentity.CompareTo(Denominator) is 0;
 
-        public static Rational<T> CreateUnsafe(T numerator, T denominator) => new(numerator, denominator);
+        private static Rational<T> UnsafeCreate(T numerator, T denominator) => new(numerator, denominator);
 
         public static bool TryCreate(T numerator, T denominator, out Rational<T> rational)
         {
             bool result = NumericRationalOperations.IsNormalized(numerator, denominator);
-            rational = result ? new(numerator, denominator) : AdditiveIdentity;
+            rational = result ? UnsafeCreate(numerator, denominator) : AdditiveIdentity;
             return result;
         }
 
@@ -33,7 +33,7 @@
         {
             var (normalizedNumerator, normalizedDenominator) =
                 CheckedRationalOperations.Normalize(numerator, denominator);
-            return new(normalizedNumerator, normalizedDenominator);
+            return UnsafeCreate(normalizedNumerator, normalizedDenominator);
         }
 
         public override string ToString() => ToString(string.Empty, CultureInfo.InvariantCulture);

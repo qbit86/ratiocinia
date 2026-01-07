@@ -85,7 +85,7 @@ namespace Ratiocinia
             if (!T.TryConvertFromChecked(value, out var converted))
                 return None(out result);
 
-            result = new(converted, T.MultiplicativeIdentity);
+            result = UnsafeCreate(converted, T.MultiplicativeIdentity);
             return true;
         }
 
@@ -95,7 +95,7 @@ namespace Ratiocinia
             if (!T.TryConvertFromSaturating(value, out var converted))
                 return None(out result);
 
-            result = new(converted, T.MultiplicativeIdentity);
+            result = UnsafeCreate(converted, T.MultiplicativeIdentity);
             return true;
         }
 
@@ -105,7 +105,7 @@ namespace Ratiocinia
             if (!T.TryConvertFromTruncating(value, out var converted))
                 return None(out result);
 
-            result = new(converted, T.MultiplicativeIdentity);
+            result = UnsafeCreate(converted, T.MultiplicativeIdentity);
             return true;
         }
 
@@ -174,7 +174,7 @@ namespace Ratiocinia
                 if (!T.TryParse(s, style, provider, out var numerator))
                     return None(out result);
 
-                result = new(numerator, T.MultiplicativeIdentity);
+                result = UnsafeCreate(numerator, T.MultiplicativeIdentity);
                 return true;
             }
 

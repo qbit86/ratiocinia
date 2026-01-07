@@ -9,13 +9,13 @@ namespace Ratiocinia
         public static Rational<T> operator checked -(Rational<T> value)
         {
             var (numerator, denominator) = CheckedRationalOperations.Negate(value.Numerator, value.Denominator);
-            return new(numerator, denominator);
+            return UnsafeCreate(numerator, denominator);
         }
 
         public static Rational<T> Negate(Rational<T> value)
         {
             var (numerator, denominator) = UncheckedRationalOperations.Negate(value.Numerator, value.Denominator);
-            return new(numerator, denominator);
+            return UnsafeCreate(numerator, denominator);
         }
     }
 }

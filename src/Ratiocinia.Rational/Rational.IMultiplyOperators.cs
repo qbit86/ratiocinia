@@ -11,14 +11,14 @@ namespace Ratiocinia
         {
             var (numerator, denominator) = CheckedRationalOperations.Multiply(
                 left.Numerator, left.Denominator, right.Numerator, right.Denominator);
-            return new(numerator, denominator);
+            return UnsafeCreate(numerator, denominator);
         }
 
         public static Rational<T> Multiply(Rational<T> left, Rational<T> right)
         {
             var (numerator, denominator) = UncheckedRationalOperations.Multiply(
                 left.Numerator, left.Denominator, right.Numerator, right.Denominator);
-            return new(numerator, denominator);
+            return UnsafeCreate(numerator, denominator);
         }
     }
 }
