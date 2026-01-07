@@ -9,22 +9,22 @@ namespace Ratiocinia
     {
         public static Rational<T> Abs(Rational<T> value) => T.IsNegative(value.Numerator) ? -value : value;
 
-        public static bool IsCanonical(Rational<T> value) => !T.IsZero(value.Denominator);
+        public static bool IsCanonical(Rational<T> value) => !value.IsDefault;
 
         public static bool IsComplexNumber(Rational<T> value) => false;
 
         public static bool IsEvenInteger(Rational<T> value) =>
             IsInteger(value) && T.IsEvenInteger(value.Numerator);
 
-        public static bool IsFinite(Rational<T> value) => !T.IsZero(value.Denominator);
+        public static bool IsFinite(Rational<T> value) => !value.IsDefault;
 
         public static bool IsImaginaryNumber(Rational<T> value) => false;
 
         public static bool IsInfinity(Rational<T> value) => false;
 
-        public static bool IsInteger(Rational<T> value) => value.Denominator.Equals(T.MultiplicativeIdentity);
+        public static bool IsInteger(Rational<T> value) => T.MultiplicativeIdentity.Equals(value.Denominator);
 
-        public static bool IsNaN(Rational<T> value) => T.IsZero(value.Denominator);
+        public static bool IsNaN(Rational<T> value) => value.IsDefault;
 
         public static bool IsNegative(Rational<T> value) => T.IsNegative(value.Numerator);
 
@@ -40,19 +40,19 @@ namespace Ratiocinia
 
         public static bool IsPositiveInfinity(Rational<T> value) => false;
 
-        public static bool IsRealNumber(Rational<T> value) => !T.IsZero(value.Denominator);
+        public static bool IsRealNumber(Rational<T> value) => !value.IsDefault;
 
         public static bool IsSubnormal(Rational<T> value) => false;
 
-        public static bool IsZero(Rational<T> value) => !T.IsZero(value.Denominator) && T.IsZero(value.Numerator);
+        public static bool IsZero(Rational<T> value) => !value.IsDefault && T.IsZero(value.Numerator);
 
         public static Rational<T> MaxMagnitude(Rational<T> x, Rational<T> y) => CompareMagnitude(x, y) >= 0 ? x : y;
 
         public static Rational<T> MaxMagnitudeNumber(Rational<T> x, Rational<T> y)
         {
-            if (IsNaN(x))
+            if (x.IsDefault)
                 return y;
-            if (IsNaN(y))
+            if (y.IsDefault)
                 return x;
 
             return MaxMagnitude(x, y);
@@ -63,9 +63,9 @@ namespace Ratiocinia
 
         public static Rational<T> MinMagnitudeNumber(Rational<T> x, Rational<T> y)
         {
-            if (IsNaN(x))
+            if (x.IsDefault)
                 return y;
-            if (IsNaN(y))
+            if (y.IsDefault)
                 return x;
 
             return MinMagnitude(x, y);
@@ -112,7 +112,7 @@ namespace Ratiocinia
         public static bool TryConvertToChecked<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (!IsFinite(value))
+            if (value.IsDefault)
                 return None(out result);
 
             // Checked conversion requires an integral value.
@@ -127,7 +127,7 @@ namespace Ratiocinia
         public static bool TryConvertToSaturating<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (!IsFinite(value))
+            if (value.IsDefault)
                 return None(out result);
 
             var quotient = value.Numerator / value.Denominator;
@@ -137,7 +137,7 @@ namespace Ratiocinia
         public static bool TryConvertToTruncating<TOther>(Rational<T> value, [MaybeNullWhen(false)] out TOther result)
             where TOther : INumberBase<TOther>
         {
-            if (!IsFinite(value))
+            if (value.IsDefault)
                 return None(out result);
 
             var quotient = value.Numerator / value.Denominator;
@@ -174,7 +174,7 @@ namespace Ratiocinia
                 if (!T.TryParse(s, style, provider, out var numerator))
                     return None(out result);
 
-                result = Create(numerator, T.MultiplicativeIdentity);
+                result = new(numerator, T.MultiplicativeIdentity);
                 return true;
             }
 
