@@ -4,7 +4,7 @@ namespace Ratiocinia
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    partial struct Rational<T> : ISpanParsable<Rational<T>>
+    partial struct Rational<T>
     {
         public static Rational<T> Parse(string s, IFormatProvider? provider) =>
             Parse(s.AsSpan(), provider);

@@ -1,8 +1,6 @@
 namespace Ratiocinia
 {
-    using System.Numerics;
-
-    partial struct Rational<T> : IIncrementOperators<Rational<T>>
+    partial struct Rational<T>
     {
         public static Rational<T> operator ++(Rational<T> value) => Increment(value);
 

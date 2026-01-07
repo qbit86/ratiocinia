@@ -2,7 +2,7 @@ namespace Ratiocinia
 {
     using System;
 
-    partial struct Rational<T> : IEquatable<Rational<T>>
+    partial struct Rational<T>
     {
         public bool Equals(Rational<T> other) =>
             Numerator.Equals(other.Numerator) && Denominator.Equals(other.Denominator);

@@ -1,9 +1,8 @@
 namespace Ratiocinia
 {
-    using System.Numerics;
     using Algorithms.Specialized;
 
-    partial struct Rational<T> : IDivisionOperators<Rational<T>, Rational<T>, Rational<T>>
+    partial struct Rational<T>
     {
         public static Rational<T> operator /(Rational<T> left, Rational<T> right) =>
             Divide(left, right);

@@ -1,9 +1,8 @@
 namespace Ratiocinia
 {
-    using System.Numerics;
     using Algorithms.Specialized;
 
-    partial struct Rational<T> : IUnaryNegationOperators<Rational<T>, Rational<T>>
+    partial struct Rational<T>
     {
         public static Rational<T> operator -(Rational<T> value) => Negate(value);
 

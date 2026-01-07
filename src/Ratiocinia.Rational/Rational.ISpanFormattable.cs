@@ -2,7 +2,7 @@ namespace Ratiocinia
 {
     using System;
 
-    partial struct Rational<T> : ISpanFormattable
+    partial struct Rational<T>
     {
         public string ToString(string? format, IFormatProvider? formatProvider)
         {
