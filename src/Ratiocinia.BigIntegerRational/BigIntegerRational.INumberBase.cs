@@ -5,32 +5,19 @@ namespace Ratiocinia
     using System.Globalization;
     using System.Numerics;
     using Algorithms.Specialized;
+    using Models;
 
-    partial struct BigIntegerRational : INumberBase<BigIntegerRational>
+    partial struct BigIntegerRational : IPartialNumberBase<BigIntegerRational>
     {
         public static BigIntegerRational Abs(BigIntegerRational value) =>
             BigInteger.IsNegative(value.Numerator) ? -value : value;
 
-        public static bool IsCanonical(BigIntegerRational value) => true;
-
-        public static bool IsComplexNumber(BigIntegerRational value) => false;
-
         public static bool IsEvenInteger(BigIntegerRational value) =>
             IsInteger(value) && BigInteger.IsEvenInteger(value.Numerator);
 
-        public static bool IsFinite(BigIntegerRational value) => true;
-
-        public static bool IsImaginaryNumber(BigIntegerRational value) => false;
-
-        public static bool IsInfinity(BigIntegerRational value) => false;
-
         public static bool IsInteger(BigIntegerRational value) => BigInteger.One.Equals(value.Denominator);
 
-        public static bool IsNaN(BigIntegerRational value) => false;
-
         public static bool IsNegative(BigIntegerRational value) => BigInteger.IsNegative(value.Numerator);
-
-        public static bool IsNegativeInfinity(BigIntegerRational value) => false;
 
         public static bool IsNormal(BigIntegerRational value) => !value.Numerator.IsZero;
 
@@ -39,12 +26,6 @@ namespace Ratiocinia
 
         public static bool IsPositive(BigIntegerRational value) =>
             !value.Numerator.IsZero && !BigInteger.IsNegative(value.Numerator);
-
-        public static bool IsPositiveInfinity(BigIntegerRational value) => false;
-
-        public static bool IsRealNumber(BigIntegerRational value) => true;
-
-        public static bool IsSubnormal(BigIntegerRational value) => false;
 
         public static bool IsZero(BigIntegerRational value) => value.Numerator.IsZero;
 
