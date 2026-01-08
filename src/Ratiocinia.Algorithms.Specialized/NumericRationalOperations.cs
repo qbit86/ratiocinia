@@ -1,6 +1,7 @@
 namespace Ratiocinia.Algorithms.Specialized
 {
     using System;
+    using System.Globalization;
     using System.Numerics;
     using Generic;
     using Models;
@@ -14,6 +15,47 @@ namespace Ratiocinia.Algorithms.Specialized
             var policy = Policy<T>.Instance;
             return RationalOperations.IsNormalized(
                 numerator, denominator, T.AdditiveIdentity, T.MultiplicativeIdentity, policy);
+        }
+
+        public static bool TryParse<T>(
+            ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out T numerator, out T denominator)
+            where T : INumberBase<T>
+        {
+            numerator = T.AdditiveIdentity;
+            denominator = T.MultiplicativeIdentity;
+            s = s.Trim();
+            if (s.IsEmpty)
+                return false;
+
+            int slashIndex = s.IndexOf('/');
+            if (slashIndex < 0)
+            {
+                if (!T.TryParse(s, style, provider, out var n))
+                    return false;
+
+                numerator = n;
+                return true;
+            }
+
+            // Reject more than one separator
+            if (s[(slashIndex + 1)..].IndexOf('/') >= 0)
+                return false;
+
+            var numeratorSpan = s[..slashIndex].Trim();
+            var denominatorSpan = s[(slashIndex + 1)..].Trim();
+            if (numeratorSpan.IsEmpty || denominatorSpan.IsEmpty)
+                return false;
+
+            if (!T.TryParse(numeratorSpan, style, provider, out var parsedNumerator) ||
+                !T.TryParse(denominatorSpan, style, provider, out var parsedDenominator))
+                return false;
+
+            if (T.AdditiveIdentity.Equals(parsedDenominator))
+                return false;
+
+            numerator = parsedNumerator;
+            denominator = parsedDenominator;
+            return true;
         }
     }
 

@@ -4,6 +4,7 @@ namespace Ratiocinia
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Numerics;
+    using Algorithms.Specialized;
 
     partial struct BigIntegerRational : INumberBase<BigIntegerRational>
     {
@@ -146,34 +147,8 @@ namespace Ratiocinia
         private static bool TryParseCore(
             ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out BigIntegerRational result)
         {
-            s = s.Trim();
-            if (s.IsEmpty)
-                return None(out result);
-
-            int slashIndex = s.IndexOf('/');
-            if (slashIndex < 0)
-            {
-                if (!BigInteger.TryParse(s, style, provider, out var numerator))
-                    return None(out result);
-
-                result = UnsafeCreate(numerator, BigInteger.One);
-                return true;
-            }
-
-            // Reject more than one separator
-            if (s[(slashIndex + 1)..].IndexOf('/') >= 0)
-                return None(out result);
-
-            var numeratorSpan = s[..slashIndex].Trim();
-            var denominatorSpan = s[(slashIndex + 1)..].Trim();
-            if (numeratorSpan.IsEmpty || denominatorSpan.IsEmpty)
-                return None(out result);
-
-            if (!BigInteger.TryParse(numeratorSpan, style, provider, out var parsedNumerator) ||
-                !BigInteger.TryParse(denominatorSpan, style, provider, out var parsedDenominator))
-                return None(out result);
-
-            if (parsedDenominator.Equals(BigInteger.Zero))
+            if (!NumericRationalOperations.TryParse<BigInteger>(
+                    s, style, provider, out var parsedNumerator, out var parsedDenominator))
                 return None(out result);
 
             try
