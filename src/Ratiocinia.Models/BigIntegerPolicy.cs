@@ -1,11 +1,10 @@
 namespace Ratiocinia.Models
 {
-    using System.Collections.Generic;
     using System.Numerics;
 
     public sealed class BigIntegerPolicy :
         IBinaryDivRemFunctions<BigInteger>,
-        IComparer<BigInteger>,
+        IComparableComparer<BigInteger>,
         IGreatestCommonDivisorFunctions<BigInteger>,
         INumberBaseAbsoluteFunctions<BigInteger>,
         INumericModulusFunctions<BigInteger>,
@@ -17,8 +16,6 @@ namespace Ratiocinia.Models
         IUncheckedUnaryNegationFunctions<BigInteger>
     {
         public static BigIntegerPolicy Instance { get; } = new();
-
-        public int Compare(BigInteger x, BigInteger y) => x.CompareTo(y);
 
         public BigInteger Gcd(BigInteger left, BigInteger right) => BigInteger.GreatestCommonDivisor(left, right);
     }
