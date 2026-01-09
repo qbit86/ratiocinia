@@ -52,31 +52,43 @@ namespace Ratiocinia
         public static bool TryConvertFromChecked<TOther>(TOther value, out BigIntegerRational result)
             where TOther : INumberBase<TOther>
         {
-            if (!BigInteger.TryParse(value.ToString(), out var converted))
+            if (!TryConvertFrom(value, out BigInteger converted))
                 return None(out result);
 
             result = UnsafeCreate(converted, BigInteger.One);
             return true;
+
+            static bool TryConvertFrom<TSelf>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+                where TSelf : INumberBase<TSelf> =>
+                TSelf.TryConvertFromChecked(value, out result);
         }
 
         public static bool TryConvertFromSaturating<TOther>(TOther value, out BigIntegerRational result)
             where TOther : INumberBase<TOther>
         {
-            if (!BigInteger.TryParse(value.ToString(), out var converted))
+            if (!TryConvertFrom(value, out BigInteger converted))
                 return None(out result);
 
             result = UnsafeCreate(converted, BigInteger.One);
             return true;
+
+            static bool TryConvertFrom<TSelf>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+                where TSelf : INumberBase<TSelf> =>
+                TSelf.TryConvertFromSaturating(value, out result);
         }
 
         public static bool TryConvertFromTruncating<TOther>(TOther value, out BigIntegerRational result)
             where TOther : INumberBase<TOther>
         {
-            if (!BigInteger.TryParse(value.ToString(), out var converted))
+            if (!TryConvertFrom(value, out BigInteger converted))
                 return None(out result);
 
             result = UnsafeCreate(converted, BigInteger.One);
             return true;
+
+            static bool TryConvertFrom<TSelf>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+                where TSelf : INumberBase<TSelf> =>
+                TSelf.TryConvertFromTruncating(value, out result);
         }
 
         public static bool TryConvertToChecked<TOther>(
