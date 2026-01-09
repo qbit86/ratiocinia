@@ -47,7 +47,6 @@ namespace Ratiocinia.Algorithms.Specialized
         {
             numerator = T.AdditiveIdentity;
             denominator = T.MultiplicativeIdentity;
-            s = s.Trim();
             if (s.IsEmpty)
                 return false;
 
@@ -65,8 +64,8 @@ namespace Ratiocinia.Algorithms.Specialized
             if (s[(slashIndex + 1)..].IndexOf('/') >= 0)
                 return false;
 
-            var numeratorSpan = s[..slashIndex].Trim();
-            var denominatorSpan = s[(slashIndex + 1)..].Trim();
+            var numeratorSpan = s[..slashIndex];
+            var denominatorSpan = s[(slashIndex + 1)..];
             if (numeratorSpan.IsEmpty || denominatorSpan.IsEmpty)
                 return false;
 
