@@ -17,6 +17,30 @@ namespace Ratiocinia.Algorithms.Specialized
                 numerator, denominator, T.AdditiveIdentity, T.MultiplicativeIdentity, policy);
         }
 
+        public static bool TryFormat<T>(
+            T numerator, T denominator, Span<char> destination, out int charsWritten,
+            ReadOnlySpan<char> format, IFormatProvider? provider)
+            where T : ISpanFormattable
+        {
+            charsWritten = 0;
+
+            if (!numerator.TryFormat(destination, out int numeratorCharsWritten, format, provider))
+                return false;
+
+            int offset = numeratorCharsWritten;
+            if (offset >= destination.Length)
+                return false;
+
+            destination[offset] = '/';
+            offset++;
+
+            if (!denominator.TryFormat(destination[offset..], out int denominatorCharsWritten, format, provider))
+                return false;
+
+            charsWritten = offset + denominatorCharsWritten;
+            return true;
+        }
+
         public static bool TryParse<T>(
             ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out T numerator, out T denominator)
             where T : INumberBase<T>
