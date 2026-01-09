@@ -1,6 +1,7 @@
 namespace Ratiocinia
 {
     using System;
+    using Algorithms.Specialized;
 
     partial struct Rational<T>
     {
@@ -8,25 +9,8 @@ namespace Ratiocinia
             $"{Numerator.ToString(format, formatProvider)}/{Denominator.ToString(format, formatProvider)}";
 
         public bool TryFormat(
-            Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-        {
-            charsWritten = 0;
-
-            if (!Numerator.TryFormat(destination, out int numeratorCharsWritten, format, provider))
-                return false;
-
-            int offset = numeratorCharsWritten;
-            if (offset >= destination.Length)
-                return false;
-
-            destination[offset] = '/';
-            offset++;
-
-            if (!Denominator.TryFormat(destination[offset..], out int denominatorCharsWritten, format, provider))
-                return false;
-
-            charsWritten = offset + denominatorCharsWritten;
-            return true;
-        }
+            Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
+            NumericRationalOperations.TryFormat(
+                Numerator, Denominator, destination, out charsWritten, format, provider);
     }
 }
