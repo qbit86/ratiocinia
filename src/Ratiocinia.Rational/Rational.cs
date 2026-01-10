@@ -1,16 +1,22 @@
 ﻿namespace Ratiocinia
 {
-    using System;
     using System.Globalization;
     using System.Numerics;
     using Algorithms.Specialized;
 
+    public static class Rational
+    {
+        public static bool TryCreate<T>(T numerator, T denominator, out Rational<T> rational)
+            where T : IBinaryInteger<T> =>
+            Rational<T>.TryCreate(numerator, denominator, out rational);
+
+        public static Rational<T> Create<T>(T numerator, T denominator)
+            where T : IBinaryInteger<T> =>
+            Rational<T>.Create(numerator, denominator);
+    }
+
     public readonly partial struct Rational<T>
-        where T :
-        IBinaryInteger<T>,
-        IComparable<T>,
-        IModulusOperators<T, T, T>,
-        INumberBase<T>
+        where T : IBinaryInteger<T>
     {
         private Rational(T numerator, T denominator) => (Numerator, RawDenominator) = (numerator, denominator);
 
