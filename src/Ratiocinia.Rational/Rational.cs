@@ -39,5 +39,11 @@
         }
 
         public override string ToString() => ToString(string.Empty, CultureInfo.InvariantCulture);
+
+        public void Deconstruct(out T numerator, out T denominator)
+        {
+            numerator = Numerator;
+            denominator = Denominator;
+        }
     }
 }

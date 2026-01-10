@@ -506,4 +506,35 @@ public sealed class BigIntegerRationalTests
     }
 
     #endregion
+
+    #region Deconstruct
+
+    [Fact]
+    public void Deconstruct_returns_numerator_and_denominator()
+    {
+        var r = BigIntegerRational.Create(3, 4);
+        var (numerator, denominator) = r;
+        Assert.Equal(new BigInteger(3), numerator);
+        Assert.Equal(new BigInteger(4), denominator);
+    }
+
+    [Fact]
+    public void Deconstruct_returns_normalized_values()
+    {
+        var r = BigIntegerRational.Create(6, 8);
+        var (numerator, denominator) = r;
+        Assert.Equal(new BigInteger(3), numerator);
+        Assert.Equal(new BigInteger(4), denominator);
+    }
+
+    [Fact]
+    public void Deconstruct_default_value_returns_zero_and_one()
+    {
+        BigIntegerRational r = default;
+        var (numerator, denominator) = r;
+        Assert.Equal(BigInteger.Zero, numerator);
+        Assert.Equal(BigInteger.One, denominator);
+    }
+
+    #endregion
 }

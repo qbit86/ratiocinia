@@ -583,4 +583,35 @@ public sealed class RationalTests
     }
 
     #endregion
+
+    #region Deconstruct
+
+    [Fact]
+    public void Deconstruct_returns_numerator_and_denominator()
+    {
+        var r = Rational<int>.Create(3, 4);
+        (int numerator, int denominator) = r;
+        Assert.Equal(3, numerator);
+        Assert.Equal(4, denominator);
+    }
+
+    [Fact]
+    public void Deconstruct_returns_normalized_values()
+    {
+        var r = Rational<int>.Create(6, 8);
+        (int numerator, int denominator) = r;
+        Assert.Equal(3, numerator);
+        Assert.Equal(4, denominator);
+    }
+
+    [Fact]
+    public void Deconstruct_default_value_returns_zero_and_one()
+    {
+        Rational<int> r = default;
+        (int numerator, int denominator) = r;
+        Assert.Equal(0, numerator);
+        Assert.Equal(1, denominator);
+    }
+
+    #endregion
 }

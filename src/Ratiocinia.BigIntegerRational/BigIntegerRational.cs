@@ -35,5 +35,11 @@ namespace Ratiocinia
         }
 
         public override string ToString() => ToString(string.Empty, CultureInfo.InvariantCulture);
+
+        public void Deconstruct(out BigInteger numerator, out BigInteger denominator)
+        {
+            numerator = Numerator;
+            denominator = Denominator;
+        }
     }
 }
