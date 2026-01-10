@@ -464,7 +464,7 @@ public sealed class BigIntegerRationalTests
     {
         var r = BigIntegerRational.Create(123, 456);
         Span<char> buffer = stackalloc char[3];
-        bool success = r.TryFormat(buffer, out int charsWritten, default, CultureInfo.InvariantCulture);
+        bool success = r.TryFormat(buffer, out int _, default, CultureInfo.InvariantCulture);
         Assert.False(success);
     }
 
