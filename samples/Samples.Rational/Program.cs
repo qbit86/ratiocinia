@@ -11,8 +11,8 @@ internal static class Program
         // === Using Rational<T> ===
 
         // Create rational numbers (automatically normalized)
-        var half = Rational<int>.Create(1, 2);
-        var third = Rational<int>.Create(1, 3);
+        var half = Rational.Create(1, 2);
+        var third = Rational.Create(1, 3);
 
         // Arithmetic operations
         var sum = half + third; // 5/6
