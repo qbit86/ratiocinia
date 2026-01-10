@@ -10,7 +10,7 @@ public sealed class RationalTests
     [Fact]
     public void Create_normalizes_fraction()
     {
-        var r = Rational<int>.Create(2, 4);
+        var r = Rational.Create(2, 4);
         Assert.Equal(1, r.Numerator);
         Assert.Equal(2, r.Denominator);
     }
@@ -18,19 +18,19 @@ public sealed class RationalTests
     [Fact]
     public void Create_normalizes_sign_to_numerator()
     {
-        var r = Rational<int>.Create(1, -2);
+        var r = Rational.Create(1, -2);
         Assert.Equal(-1, r.Numerator);
         Assert.Equal(2, r.Denominator);
     }
 
     [Fact]
     public void Create_with_zero_denominator_throws() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() => Rational<int>.Create(1, 0));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Rational.Create(1, 0));
 
     [Fact]
     public void TryCreate_with_normalized_values_returns_true()
     {
-        bool result = Rational<int>.TryCreate(1, 2, out var r);
+        bool result = Rational.TryCreate(1, 2, out var r);
         Assert.True(result);
         Assert.Equal(1, r.Numerator);
         Assert.Equal(2, r.Denominator);
@@ -39,7 +39,7 @@ public sealed class RationalTests
     [Fact]
     public void TryCreate_with_non_normalized_values_returns_false()
     {
-        bool result = Rational<int>.TryCreate(2, 4, out var r);
+        bool result = Rational.TryCreate(2, 4, out var r);
         Assert.False(result);
         Assert.Equal(0, r.Numerator);
         Assert.Equal(1, r.Denominator);
@@ -78,8 +78,8 @@ public sealed class RationalTests
     [Fact]
     public void Addition_operator_adds_fractions()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 3);
         var result = a + b;
         Assert.Equal(5, result.Numerator);
         Assert.Equal(6, result.Denominator);
@@ -88,8 +88,8 @@ public sealed class RationalTests
     [Fact]
     public void Addition_operator_reduces_result()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 2);
         var result = a + b;
         Assert.Equal(1, result.Numerator);
         Assert.Equal(1, result.Denominator);
@@ -98,8 +98,8 @@ public sealed class RationalTests
     [Fact]
     public void Subtraction_operator_subtracts_fractions()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 3);
         var result = a - b;
         Assert.Equal(1, result.Numerator);
         Assert.Equal(6, result.Denominator);
@@ -108,8 +108,8 @@ public sealed class RationalTests
     [Fact]
     public void Subtraction_operator_handles_negative_result()
     {
-        var a = Rational<int>.Create(1, 3);
-        var b = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 3);
+        var b = Rational.Create(1, 2);
         var result = a - b;
         Assert.Equal(-1, result.Numerator);
         Assert.Equal(6, result.Denominator);
@@ -118,8 +118,8 @@ public sealed class RationalTests
     [Fact]
     public void Multiplication_operator_multiplies_fractions()
     {
-        var a = Rational<int>.Create(2, 3);
-        var b = Rational<int>.Create(3, 4);
+        var a = Rational.Create(2, 3);
+        var b = Rational.Create(3, 4);
         var result = a * b;
         Assert.Equal(1, result.Numerator);
         Assert.Equal(2, result.Denominator);
@@ -128,8 +128,8 @@ public sealed class RationalTests
     [Fact]
     public void Division_operator_divides_fractions()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(3, 4);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(3, 4);
         var result = a / b;
         Assert.Equal(2, result.Numerator);
         Assert.Equal(3, result.Denominator);
@@ -138,7 +138,7 @@ public sealed class RationalTests
     [Fact]
     public void Division_by_zero_throws()
     {
-        var a = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
         var b = Rational<int>.Zero;
         Assert.Throws<ArgumentOutOfRangeException>(() => a / b);
     }
@@ -146,7 +146,7 @@ public sealed class RationalTests
     [Fact]
     public void Unary_negation_operator_negates_fraction()
     {
-        var a = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
         var result = -a;
         Assert.Equal(-1, result.Numerator);
         Assert.Equal(2, result.Denominator);
@@ -155,7 +155,7 @@ public sealed class RationalTests
     [Fact]
     public void Unary_plus_operator_returns_same_value()
     {
-        var a = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
         var result = +a;
         Assert.Equal(a, result);
     }
@@ -163,7 +163,7 @@ public sealed class RationalTests
     [Fact]
     public void Increment_operator_adds_one()
     {
-        var a = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
         var result = ++a;
         Assert.Equal(3, result.Numerator);
         Assert.Equal(2, result.Denominator);
@@ -172,7 +172,7 @@ public sealed class RationalTests
     [Fact]
     public void Decrement_operator_subtracts_one()
     {
-        var a = Rational<int>.Create(3, 2);
+        var a = Rational.Create(3, 2);
         var result = --a;
         Assert.Equal(1, result.Numerator);
         Assert.Equal(2, result.Denominator);
@@ -185,16 +185,16 @@ public sealed class RationalTests
     [Fact]
     public void Checked_addition_overflow_throws()
     {
-        var a = Rational<int>.Create(int.MaxValue, 1);
-        var b = Rational<int>.Create(1, 1);
+        var a = Rational.Create(int.MaxValue, 1);
+        var b = Rational.Create(1, 1);
         Assert.Throws<OverflowException>(() => checked(a + b));
     }
 
     [Fact]
     public void Unchecked_addition_overflow_wraps()
     {
-        var a = Rational<int>.Create(int.MaxValue, 1);
-        var b = Rational<int>.Create(1, 1);
+        var a = Rational.Create(int.MaxValue, 1);
+        var b = Rational.Create(1, 1);
         var result = unchecked(a + b);
         Assert.Equal(int.MinValue, result.Numerator);
         Assert.Equal(1, result.Denominator);
@@ -203,30 +203,30 @@ public sealed class RationalTests
     [Fact]
     public void Checked_subtraction_overflow_throws()
     {
-        var a = Rational<int>.Create(int.MinValue, 1);
-        var b = Rational<int>.Create(1, 1);
+        var a = Rational.Create(int.MinValue, 1);
+        var b = Rational.Create(1, 1);
         Assert.Throws<OverflowException>(() => checked(a - b));
     }
 
     [Fact]
     public void Checked_multiplication_overflow_throws()
     {
-        var a = Rational<int>.Create(int.MaxValue, 1);
-        var b = Rational<int>.Create(2, 1);
+        var a = Rational.Create(int.MaxValue, 1);
+        var b = Rational.Create(2, 1);
         Assert.Throws<OverflowException>(() => checked(a * b));
     }
 
     [Fact]
     public void Checked_negation_overflow_throws()
     {
-        var a = Rational<int>.Create(int.MinValue, 1);
+        var a = Rational.Create(int.MinValue, 1);
         Assert.Throws<OverflowException>(() => checked(-a));
     }
 
     [Fact]
     public void Unchecked_negation_overflow_wraps()
     {
-        var a = Rational<int>.Create(int.MinValue, 1);
+        var a = Rational.Create(int.MinValue, 1);
         var result = unchecked(-a);
         Assert.Equal(int.MinValue, result.Numerator);
         Assert.Equal(1, result.Denominator);
@@ -239,24 +239,24 @@ public sealed class RationalTests
     [Fact]
     public void Equality_operator_returns_true_for_equal_values()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(2, 4);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(2, 4);
         Assert.True(a == b);
     }
 
     [Fact]
     public void Inequality_operator_returns_true_for_different_values()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 3);
         Assert.True(a != b);
     }
 
     [Fact]
     public void LessThan_operator_compares_correctly()
     {
-        var a = Rational<int>.Create(1, 3);
-        var b = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 3);
+        var b = Rational.Create(1, 2);
         Assert.True(a < b);
         Assert.False(b < a);
     }
@@ -264,9 +264,9 @@ public sealed class RationalTests
     [Fact]
     public void LessThanOrEqual_operator_compares_correctly()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 2);
-        var c = Rational<int>.Create(2, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 2);
+        var c = Rational.Create(2, 3);
         Assert.True(a <= b);
         Assert.True(a <= c);
         Assert.False(c <= a);
@@ -275,8 +275,8 @@ public sealed class RationalTests
     [Fact]
     public void GreaterThan_operator_compares_correctly()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 3);
         Assert.True(a > b);
         Assert.False(b > a);
     }
@@ -284,9 +284,9 @@ public sealed class RationalTests
     [Fact]
     public void GreaterThanOrEqual_operator_compares_correctly()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 2);
-        var c = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 2);
+        var c = Rational.Create(1, 3);
         Assert.True(a >= b);
         Assert.True(a >= c);
         Assert.False(c >= a);
@@ -295,9 +295,9 @@ public sealed class RationalTests
     [Fact]
     public void CompareTo_returns_correct_ordering()
     {
-        var a = Rational<int>.Create(1, 3);
-        var b = Rational<int>.Create(1, 2);
-        var c = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 3);
+        var b = Rational.Create(1, 2);
+        var c = Rational.Create(1, 2);
         Assert.True(a.CompareTo(b) < 0);
         Assert.True(b.CompareTo(a) > 0);
         Assert.Equal(0, b.CompareTo(c));
@@ -310,8 +310,8 @@ public sealed class RationalTests
     [Fact]
     public void Abs_returns_absolute_value()
     {
-        var negative = Rational<int>.Create(-1, 2);
-        var positive = Rational<int>.Create(1, 2);
+        var negative = Rational.Create(-1, 2);
+        var positive = Rational.Create(1, 2);
         Assert.Equal(positive, Rational<int>.Abs(negative));
         Assert.Equal(positive, Rational<int>.Abs(positive));
     }
@@ -327,8 +327,8 @@ public sealed class RationalTests
     [Fact]
     public void IsNegative_returns_true_for_negative_values()
     {
-        var negative = Rational<int>.Create(-1, 2);
-        var positive = Rational<int>.Create(1, 2);
+        var negative = Rational.Create(-1, 2);
+        var positive = Rational.Create(1, 2);
         Assert.True(Rational<int>.IsNegative(negative));
         Assert.False(Rational<int>.IsNegative(positive));
         Assert.False(Rational<int>.IsNegative(Rational<int>.Zero));
@@ -337,8 +337,8 @@ public sealed class RationalTests
     [Fact]
     public void IsPositive_returns_true_for_positive_values()
     {
-        var negative = Rational<int>.Create(-1, 2);
-        var positive = Rational<int>.Create(1, 2);
+        var negative = Rational.Create(-1, 2);
+        var positive = Rational.Create(1, 2);
         Assert.False(Rational<int>.IsPositive(negative));
         Assert.True(Rational<int>.IsPositive(positive));
         Assert.False(Rational<int>.IsPositive(Rational<int>.Zero));
@@ -347,8 +347,8 @@ public sealed class RationalTests
     [Fact]
     public void IsInteger_returns_true_for_integer_values()
     {
-        var integer = Rational<int>.Create(4, 2);
-        var nonInteger = Rational<int>.Create(1, 2);
+        var integer = Rational.Create(4, 2);
+        var nonInteger = Rational.Create(1, 2);
         Assert.True(Rational<int>.IsInteger(integer));
         Assert.False(Rational<int>.IsInteger(nonInteger));
     }
@@ -356,9 +356,9 @@ public sealed class RationalTests
     [Fact]
     public void IsEvenInteger_returns_true_for_even_integers()
     {
-        var even = Rational<int>.Create(4, 1);
-        var odd = Rational<int>.Create(3, 1);
-        var nonInteger = Rational<int>.Create(1, 2);
+        var even = Rational.Create(4, 1);
+        var odd = Rational.Create(3, 1);
+        var nonInteger = Rational.Create(1, 2);
         Assert.True(Rational<int>.IsEvenInteger(even));
         Assert.False(Rational<int>.IsEvenInteger(odd));
         Assert.False(Rational<int>.IsEvenInteger(nonInteger));
@@ -367,9 +367,9 @@ public sealed class RationalTests
     [Fact]
     public void IsOddInteger_returns_true_for_odd_integers()
     {
-        var even = Rational<int>.Create(4, 1);
-        var odd = Rational<int>.Create(3, 1);
-        var nonInteger = Rational<int>.Create(1, 2);
+        var even = Rational.Create(4, 1);
+        var odd = Rational.Create(3, 1);
+        var nonInteger = Rational.Create(1, 2);
         Assert.False(Rational<int>.IsOddInteger(even));
         Assert.True(Rational<int>.IsOddInteger(odd));
         Assert.False(Rational<int>.IsOddInteger(nonInteger));
@@ -385,16 +385,16 @@ public sealed class RationalTests
     [Fact]
     public void MaxMagnitude_returns_value_with_larger_absolute_value()
     {
-        var a = Rational<int>.Create(-3, 2);
-        var b = Rational<int>.Create(1, 2);
+        var a = Rational.Create(-3, 2);
+        var b = Rational.Create(1, 2);
         Assert.Equal(a, Rational<int>.MaxMagnitude(a, b));
     }
 
     [Fact]
     public void MinMagnitude_returns_value_with_smaller_absolute_value()
     {
-        var a = Rational<int>.Create(-3, 2);
-        var b = Rational<int>.Create(1, 2);
+        var a = Rational.Create(-3, 2);
+        var b = Rational.Create(1, 2);
         Assert.Equal(b, Rational<int>.MinMagnitude(a, b));
     }
 
@@ -490,14 +490,14 @@ public sealed class RationalTests
     [Fact]
     public void ToString_returns_fraction_format()
     {
-        var r = Rational<int>.Create(3, 4);
+        var r = Rational.Create(3, 4);
         Assert.Equal("3/4", r.ToString());
     }
 
     [Fact]
     public void ToString_with_format_applies_to_components()
     {
-        var r = Rational<int>.Create(1000, 2000);
+        var r = Rational.Create(1000, 2000);
         string result = r.ToString("N0", CultureInfo.InvariantCulture);
         Assert.Equal("1/2", result);
     }
@@ -505,7 +505,7 @@ public sealed class RationalTests
     [Fact]
     public void TryFormat_formats_to_span()
     {
-        var r = Rational<int>.Create(3, 4);
+        var r = Rational.Create(3, 4);
         Span<char> buffer = stackalloc char[10];
         bool success = r.TryFormat(buffer, out int charsWritten, default, CultureInfo.InvariantCulture);
         Assert.True(success);
@@ -515,7 +515,7 @@ public sealed class RationalTests
     [Fact]
     public void TryFormat_returns_false_when_buffer_too_small()
     {
-        var r = Rational<int>.Create(123, 456);
+        var r = Rational.Create(123, 456);
         Span<char> buffer = stackalloc char[3];
         bool success = r.TryFormat(buffer, out int _, default, CultureInfo.InvariantCulture);
         Assert.False(success);
@@ -528,8 +528,8 @@ public sealed class RationalTests
     [Fact]
     public void Equals_returns_true_for_equal_values()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(2, 4);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(2, 4);
         Assert.True(a.Equals(b));
         Assert.True(a.Equals((object)b));
     }
@@ -537,8 +537,8 @@ public sealed class RationalTests
     [Fact]
     public void Equals_returns_false_for_different_values()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(1, 3);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(1, 3);
         Assert.False(a.Equals(b));
         Assert.False(a.Equals((object)b));
     }
@@ -546,15 +546,15 @@ public sealed class RationalTests
     [Fact]
     public void Equals_returns_false_for_null()
     {
-        var a = Rational<int>.Create(1, 2);
+        var a = Rational.Create(1, 2);
         Assert.False(a.Equals(null));
     }
 
     [Fact]
     public void GetHashCode_returns_same_value_for_equal_rationals()
     {
-        var a = Rational<int>.Create(1, 2);
-        var b = Rational<int>.Create(2, 4);
+        var a = Rational.Create(1, 2);
+        var b = Rational.Create(2, 4);
         Assert.Equal(a.GetHashCode(), b.GetHashCode());
     }
 
@@ -565,8 +565,8 @@ public sealed class RationalTests
     [Fact]
     public void Works_with_long_type()
     {
-        var a = Rational<long>.Create(1L, 2L);
-        var b = Rational<long>.Create(1L, 3L);
+        var a = Rational.Create(1L, 2L);
+        var b = Rational.Create(1L, 3L);
         var result = a + b;
         Assert.Equal(5L, result.Numerator);
         Assert.Equal(6L, result.Denominator);
@@ -589,7 +589,7 @@ public sealed class RationalTests
     [Fact]
     public void Deconstruct_returns_numerator_and_denominator()
     {
-        var r = Rational<int>.Create(3, 4);
+        var r = Rational.Create(3, 4);
         (int numerator, int denominator) = r;
         Assert.Equal(3, numerator);
         Assert.Equal(4, denominator);
@@ -598,7 +598,7 @@ public sealed class RationalTests
     [Fact]
     public void Deconstruct_returns_normalized_values()
     {
-        var r = Rational<int>.Create(6, 8);
+        var r = Rational.Create(6, 8);
         (int numerator, int denominator) = r;
         Assert.Equal(3, numerator);
         Assert.Equal(4, denominator);
