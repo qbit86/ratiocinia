@@ -1,4 +1,4 @@
-﻿namespace Ratiocinia.Algorithms.Specialized
+namespace Ratiocinia.Algorithms.Specialized
 {
     using System;
     using System.Numerics;

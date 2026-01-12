@@ -1,4 +1,4 @@
-﻿namespace Ratiocinia.Algorithms.Generic
+namespace Ratiocinia.Algorithms.Generic
 {
     using System;
     using System.Collections.Generic;
