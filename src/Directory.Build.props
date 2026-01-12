@@ -2,8 +2,9 @@
   <Import Project="../Directory.Build.props" />
   <PropertyGroup>
     <Authors>Viktor Tselov</Authors>
-    <Copyright>Copyright (c) Viktor Tselov 2026</Copyright>
+    <Copyright>Copyright (c) 2026 Viktor Tselov</Copyright>
     <IncludeSymbols>true</IncludeSymbols>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>https://github.com/qbit86/ratiocinia/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -24,6 +25,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="$(RepoRoot)/assets/icon.png" Pack="true" PackagePath="" />
     <SourceRoot Include="$(RepoRoot)" />
   </ItemGroup>
 </Project>
