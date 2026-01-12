@@ -1,4 +1,4 @@
-﻿namespace Ratiocinia
+namespace Ratiocinia
 {
     using System.Globalization;
     using System.Numerics;
