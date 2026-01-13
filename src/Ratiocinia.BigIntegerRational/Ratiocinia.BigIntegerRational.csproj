@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ratiocinia.Algorithms.Specialized\Ratiocinia.Algorithms.Specialized.csproj" />
+    <ProjectReference Include="..\Ratiocinia.Models\Ratiocinia.Models.csproj" />
   </ItemGroup>
 
 </Project>

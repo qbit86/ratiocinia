@@ -81,15 +81,27 @@ var product = large * simple;
 
 ## Architecture
 
-Ratiocinia uses a layered architecture with policy-based design:
+Ratiocinia uses a layered architecture with policy-based design.
+Project references between packages are:
 
-```
-Ratiocinia.Abstractions (netstandard2.0)
-└── Ratiocinia.Algorithms.Generic (netstandard2.0)
-    └── Ratiocinia.Models (net7.0)
-        └── Ratiocinia.Algorithms.Specialized (net7.0)
-            ├── Ratiocinia.Rational (net7.0)
-            └── Ratiocinia.BigIntegerRational (net7.0)
+```mermaid
+graph BT
+  Abstractions["Ratiocinia.Abstractions"]
+  AlgorithmsGeneric["Ratiocinia.Algorithms.Generic"]
+  Models["Ratiocinia.Models"]
+  AlgorithmsSpecialized["Ratiocinia.Algorithms.Specialized"]
+  Rational["Ratiocinia.Rational"]
+  BigIntegerRational["Ratiocinia.BigIntegerRational"]
+
+  AlgorithmsGeneric --> Abstractions
+  Models --> Abstractions
+  Models --> AlgorithmsGeneric
+  AlgorithmsSpecialized --> AlgorithmsGeneric
+  AlgorithmsSpecialized --> Models
+  Rational --> AlgorithmsSpecialized
+  Rational --> Models
+  BigIntegerRational --> AlgorithmsSpecialized
+  BigIntegerRational --> Models
 ```
 
 ### Projects
