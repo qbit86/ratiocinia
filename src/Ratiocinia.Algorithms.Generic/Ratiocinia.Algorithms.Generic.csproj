@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Description>Policy-based rational arithmetic algorithms with minimal dependencies.</Description>
+    <PackageTags>algorithms;generic-math;rational</PackageTags>
+    <Title>Rational arithmetic generic algorithms</Title>
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
 
@@ -12,8 +15,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(DebugType)' == 'portable'">
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <EmbedAllSources>true</EmbedAllSources>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
