@@ -6,6 +6,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>https://github.com/qbit86/ratiocinia/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -26,6 +27,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(RepoRoot)/assets/icon.png" Pack="true" PackagePath="" />
+    <None Include="$(RepoRoot)/README.md" Pack="true" PackagePath="/" />
     <SourceRoot Include="$(RepoRoot)" />
   </ItemGroup>
 </Project>
