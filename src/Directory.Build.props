@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Authors>Viktor Tselov</Authors>
     <Copyright>Copyright (c) 2026 Viktor Tselov</Copyright>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
