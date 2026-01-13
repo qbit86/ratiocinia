@@ -4,8 +4,27 @@ namespace Ratiocinia.Algorithms.Generic
     using System.Collections.Generic;
     using System.Diagnostics;
 
+    /// <summary>
+    /// Provides generic arithmetic operations for rational numbers represented as numerator/denominator pairs.
+    /// </summary>
+    /// <remarks>
+    /// All operations assume input rational numbers are in normalized form
+    /// (positive denominator, reduced to the lowest terms) unless otherwise noted.
+    /// Results are returned in normalized form.
+    /// </remarks>
     public static class RationalOperations
     {
+        /// <summary>
+        /// Adds two rational numbers.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="leftNumerator">The numerator of the first rational number.</param>
+        /// <param name="leftDenominator">The denominator of the first rational number.</param>
+        /// <param name="rightNumerator">The numerator of the second rational number.</param>
+        /// <param name="rightDenominator">The denominator of the second rational number.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>A tuple containing the numerator and denominator of the sum in reduced form.</returns>
         public static (T Numerator, T Denominator) Add<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
@@ -26,6 +45,20 @@ namespace Ratiocinia.Algorithms.Generic
             return (numerator, denominator);
         }
 
+        /// <summary>
+        /// Divides two rational numbers.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TAdditiveIdentity">The type representing the additive identity (zero), which must be comparable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="leftNumerator">The numerator of the dividend.</param>
+        /// <param name="leftDenominator">The denominator of the dividend.</param>
+        /// <param name="rightNumerator">The numerator of the divisor.</param>
+        /// <param name="rightDenominator">The denominator of the divisor.</param>
+        /// <param name="additiveIdentity">The additive identity (zero) used for sign normalization.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>A tuple containing the numerator and denominator of the quotient in reduced form.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the divisor is zero (<paramref name="rightNumerator" /> is zero).</exception>
         public static (T Numerator, T Denominator) Divide<T, TAdditiveIdentity, TPolicy>(
             T leftNumerator,
             T leftDenominator,
@@ -63,6 +96,17 @@ namespace Ratiocinia.Algorithms.Generic
             return (numerator, denominator);
         }
 
+        /// <summary>
+        /// Multiplies two rational numbers.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="leftNumerator">The numerator of the first rational number.</param>
+        /// <param name="leftDenominator">The denominator of the first rational number.</param>
+        /// <param name="rightNumerator">The numerator of the second rational number.</param>
+        /// <param name="rightDenominator">The denominator of the second rational number.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>A tuple containing the numerator and denominator of the product in reduced form.</returns>
         public static (T Numerator, T Denominator) Multiply<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
@@ -79,6 +123,17 @@ namespace Ratiocinia.Algorithms.Generic
             return (numerator, denominator);
         }
 
+        /// <summary>
+        /// Subtracts two rational numbers.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="leftNumerator">The numerator of the minuend.</param>
+        /// <param name="leftDenominator">The denominator of the minuend.</param>
+        /// <param name="rightNumerator">The numerator of the subtrahend.</param>
+        /// <param name="rightDenominator">The denominator of the subtrahend.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>A tuple containing the numerator and denominator of the difference in reduced form.</returns>
         public static (T Numerator, T Denominator) Subtract<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
@@ -99,10 +154,47 @@ namespace Ratiocinia.Algorithms.Generic
             return (numerator, denominator);
         }
 
+        /// <summary>
+        /// Negates a rational number.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing the unary negation operation.</typeparam>
+        /// <param name="numerator">The numerator of the rational number to negate.</param>
+        /// <param name="denominator">The denominator of the rational number to negate.</param>
+        /// <param name="policy">The policy providing the negation operation.</param>
+        /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (T Numerator, T Denominator) Negate<T, TPolicy>(T numerator, T denominator, TPolicy policy)
             where TPolicy : IUnaryNegationFunctions<T> =>
             (policy.Negate(numerator), denominator);
 
+        /// <summary>
+        /// Normalizes a rational number to its canonical form.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TAdditiveIdentityComparable">The type representing the additive identity (zero), which must be comparable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="numerator">The numerator of the rational number to normalize.</param>
+        /// <param name="denominator">The denominator of the rational number to normalize.</param>
+        /// <param name="additiveIdentity">The additive identity (zero) value.</param>
+        /// <param name="multiplicativeIdentity">The multiplicative identity (one) value.</param>
+        /// <param name="additiveIdentityComparable">The additive identity used for comparisons.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>A tuple containing the normalized numerator and denominator, reduced to lowest terms with a positive denominator.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="denominator" /> is zero.</exception>
+        /// <remarks>
+        /// Normalization ensures:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>The denominator is always positive.</description>
+        /// </item>
+        /// <item>
+        /// <description>The numerator and denominator are reduced to lowest terms (GCD is 1).</description>
+        /// </item>
+        /// <item>
+        /// <description>Zero is represented as 0/1.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         public static (T Numerator, T Denominator) Normalize<T, TAdditiveIdentityComparable, TPolicy>(
             T numerator,
             T denominator,
@@ -136,6 +228,35 @@ namespace Ratiocinia.Algorithms.Generic
             return (numerator, denominator);
         }
 
+        /// <summary>
+        /// Determines whether a rational number is in normalized (canonical) form.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TAdditiveIdentity">The type representing the additive identity (zero), which must be comparable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TMultiplicativeIdentity">The type representing the multiplicative identity (one), which must be equatable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic operations.</typeparam>
+        /// <param name="numerator">The numerator of the rational number to check.</param>
+        /// <param name="denominator">The denominator of the rational number to check.</param>
+        /// <param name="additiveIdentity">The additive identity (zero) used for comparisons.</param>
+        /// <param name="multiplicativeIdentity">The multiplicative identity (one) used for comparisons.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>
+        /// <see langword="true" /> if the rational number is normalized; otherwise, <see langword="false" />.
+        /// </returns>
+        /// <remarks>
+        /// A rational number is considered normalized if:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>The denominator is positive.</description>
+        /// </item>
+        /// <item>
+        /// <description>The numerator and denominator are coprime (GCD is 1).</description>
+        /// </item>
+        /// <item>
+        /// <description>If the numerator is zero, the denominator must be 1.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         public static bool IsNormalized<T, TAdditiveIdentity, TMultiplicativeIdentity, TPolicy>(
             T numerator,
             T denominator,
@@ -158,6 +279,25 @@ namespace Ratiocinia.Algorithms.Generic
             return multiplicativeIdentity.Equals(abs);
         }
 
+        /// <summary>
+        /// Determines whether one rational number is less than another.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing arithmetic and comparison operations.</typeparam>
+        /// <param name="leftNumerator">The numerator of the first rational number.</param>
+        /// <param name="leftDenominator">The denominator of the first rational number.</param>
+        /// <param name="rightNumerator">The numerator of the second rational number.</param>
+        /// <param name="rightDenominator">The denominator of the second rational number.</param>
+        /// <param name="additiveIdentity">The additive identity (zero) used for comparisons.</param>
+        /// <param name="policy">The policy providing arithmetic and comparison operations.</param>
+        /// <returns>
+        /// <see langword="true" /> if the first rational number is less than the second; otherwise, <see langword="false" />.
+        /// </returns>
+        /// <remarks>
+        /// This method uses continued fraction expansion via the Euclidean algorithm to compare
+        /// rational numbers without overflow that would occur with direct cross-multiplication.
+        /// Both input rational numbers must have positive denominators.
+        /// </remarks>
         public static bool LessThan<T, TPolicy>(
             T leftNumerator,
             T leftDenominator,

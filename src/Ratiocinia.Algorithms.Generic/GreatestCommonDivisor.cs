@@ -2,8 +2,22 @@ namespace Ratiocinia.Algorithms.Generic
 {
     using System;
 
+    /// <summary>
+    /// Provides a generic implementation of the greatest common divisor (GCD) algorithm.
+    /// </summary>
     public static class GreatestCommonDivisor
     {
+        /// <summary>
+        /// Computes the greatest common divisor of two values using the Euclidean algorithm.
+        /// </summary>
+        /// <typeparam name="T">The type of the values.</typeparam>
+        /// <typeparam name="TAdditiveIdentity">The type representing the additive identity (zero), which must be equatable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing the modulus operation.</typeparam>
+        /// <param name="left">The first value.</param>
+        /// <param name="right">The second value.</param>
+        /// <param name="identity">The additive identity (zero) used to detect termination.</param>
+        /// <param name="policy">The policy providing arithmetic operations.</param>
+        /// <returns>The greatest common divisor of <paramref name="left" /> and <paramref name="right" />.</returns>
         public static T Gcd<T, TAdditiveIdentity, TPolicy>(
             T left, T right, TAdditiveIdentity identity, TPolicy policy)
 #if NET9_0_OR_GREATER
