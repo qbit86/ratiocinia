@@ -21,10 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Ratiocinia.Abstractions\Ratiocinia.Abstractions.csproj" />
   </ItemGroup>
 
