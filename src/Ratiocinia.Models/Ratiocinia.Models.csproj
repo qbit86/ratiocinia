@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Description>Checked/unchecked arithmetic policy implementations and supporting models for rational arithmetic.</Description>
+    <PackageTags>generic-math;implementations;models;rational</PackageTags>
+    <Title>Rational arithmetic models</Title>
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
 
