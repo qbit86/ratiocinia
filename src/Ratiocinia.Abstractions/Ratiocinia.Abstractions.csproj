@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Description>Pure interfaces for policy-based rational arithmetic and generic math.</Description>
+    <PackageTags>abstractions;generic-math;interfaces;rational</PackageTags>
+    <Title>Rational arithmetic abstractions</Title>
     <VersionSuffix>preview</VersionSuffix>
   </PropertyGroup>
 
