@@ -86,16 +86,16 @@ Project references between packages are:
 
 ```mermaid
 graph BT
-  Abstractions["Ratiocinia.Abstractions"]
-  AlgorithmsGeneric["Ratiocinia.Algorithms.Generic"]
-  Models["Ratiocinia.Models"]
-  AlgorithmsSpecialized["Ratiocinia.Algorithms.Specialized"]
-  Rational["Ratiocinia.Rational"]
-  BigIntegerRational["Ratiocinia.BigIntegerRational"]
+  Abstractions["Abstractions"]
+  AlgorithmsGeneric["Algorithms.Generic"]
+  Models["Models"]
+  AlgorithmsSpecialized["Algorithms.Specialized"]
+  Rational["Rational"]
+  BigIntegerRational["BigIntegerRational"]
 
   AlgorithmsGeneric --> Abstractions
-  Models --> Abstractions
   Models --> AlgorithmsGeneric
+  Models --> Abstractions
   AlgorithmsSpecialized --> AlgorithmsGeneric
   AlgorithmsSpecialized --> Models
   Rational --> AlgorithmsSpecialized
