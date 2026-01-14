@@ -4,9 +4,24 @@ namespace Ratiocinia
 
     partial struct Rational<T>
     {
+        /// <summary>
+        /// Subtracts one rational number from another.
+        /// </summary>
+        /// <param name="left">The minuend.</param>
+        /// <param name="right">The subtrahend.</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" />.</returns>
         public static Rational<T> operator -(Rational<T> left, Rational<T> right) =>
             Subtract(left, right);
 
+        /// <summary>
+        /// Subtracts one rational number from another with overflow checking.
+        /// </summary>
+        /// <param name="left">The minuend.</param>
+        /// <param name="right">The subtrahend.</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" />.</returns>
+        /// <exception cref="System.OverflowException">
+        /// Thrown when the operation causes an arithmetic overflow.
+        /// </exception>
         public static Rational<T> operator checked -(Rational<T> left, Rational<T> right)
         {
             var (numerator, denominator) = CheckedRationalOperations.Subtract(
@@ -14,6 +29,12 @@ namespace Ratiocinia
             return UnsafeCreate(numerator, denominator);
         }
 
+        /// <summary>
+        /// Subtracts one rational number from another.
+        /// </summary>
+        /// <param name="left">The minuend.</param>
+        /// <param name="right">The subtrahend.</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" />.</returns>
         public static Rational<T> Subtract(Rational<T> left, Rational<T> right)
         {
             var (numerator, denominator) = UncheckedRationalOperations.Subtract(

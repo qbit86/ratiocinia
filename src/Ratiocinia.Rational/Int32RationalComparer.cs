@@ -9,6 +9,9 @@ namespace Ratiocinia
     /// </summary>
     public sealed class Int32RationalComparer : IComparer<Rational<int>>
     {
+        /// <summary>
+        /// Gets the singleton instance of the <see cref="Int32RationalComparer" /> class.
+        /// </summary>
         public static Int32RationalComparer Instance { get; } = new();
 
         /// <summary>
