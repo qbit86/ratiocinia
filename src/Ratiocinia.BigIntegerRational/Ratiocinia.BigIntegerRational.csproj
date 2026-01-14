@@ -4,7 +4,7 @@
     <Description>Arbitrary-precision rational arithmetic via BigIntegerRational.</Description>
     <PackageTags>arbitrary-precision;fraction;numeric;rational</PackageTags>
     <Title>BigIntegerRational</Title>
-    <VersionSuffix>preview</VersionSuffix>
+    <VersionPrefix>0.1.1</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup>
