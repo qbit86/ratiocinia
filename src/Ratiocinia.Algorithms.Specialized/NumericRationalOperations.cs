@@ -6,8 +6,18 @@ namespace Ratiocinia.Algorithms.Specialized
     using Generic;
     using Models;
 
+    /// <summary>
+    /// Provides utility operations for rational numbers using generic numeric types.
+    /// </summary>
     public static class NumericRationalOperations
     {
+        /// <summary>
+        /// Determines whether a rational number is in normalized form.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the numerator and denominator.</typeparam>
+        /// <param name="numerator">The numerator of the rational number.</param>
+        /// <param name="denominator">The denominator of the rational number.</param>
+        /// <returns><see langword="true" /> if the rational number is normalized; otherwise, <see langword="false" />.</returns>
         public static bool IsNormalized<T>(T numerator, T denominator)
             where T : IAdditiveIdentity<T, T>, IComparable<T>, IEquatable<T>,
             IModulusOperators<T, T, T>, IMultiplicativeIdentity<T, T>, INumberBase<T>
@@ -17,6 +27,17 @@ namespace Ratiocinia.Algorithms.Specialized
                 numerator, denominator, T.AdditiveIdentity, T.MultiplicativeIdentity, policy);
         }
 
+        /// <summary>
+        /// Tries to format a rational number into a character span.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the numerator and denominator.</typeparam>
+        /// <param name="numerator">The numerator of the rational number.</param>
+        /// <param name="denominator">The denominator of the rational number.</param>
+        /// <param name="destination">The span to write the formatted rational number to.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters written to the destination.</param>
+        /// <param name="format">A span containing the format string.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <returns><see langword="true" /> if the formatting succeeded; otherwise, <see langword="false" />.</returns>
         public static bool TryFormat<T>(
             T numerator, T denominator, Span<char> destination, out int charsWritten,
             ReadOnlySpan<char> format, IFormatProvider? provider)
@@ -41,6 +62,20 @@ namespace Ratiocinia.Algorithms.Specialized
             return true;
         }
 
+        /// <summary>
+        /// Tries to parse a string representation of a rational number into its numerator and denominator components.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the numerator and denominator.</typeparam>
+        /// <param name="s">A span containing the characters to parse.</param>
+        /// <param name="style">A bitwise combination of number styles that can be present in <paramref name="s" />.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="numerator">When this method returns, contains the parsed numerator if parsing succeeded.</param>
+        /// <param name="denominator">When this method returns, contains the parsed denominator if parsing succeeded.</param>
+        /// <returns><see langword="true" /> if parsing succeeded; otherwise, <see langword="false" />.</returns>
+        /// <remarks>
+        /// The expected format is "numerator/denominator". If no separator is present, the input is parsed as a whole number
+        /// with a denominator of 1. Parsing fails if the denominator is zero.
+        /// </remarks>
         public static bool TryParse<T>(
             ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out T numerator, out T denominator)
             where T : INumberBase<T>
