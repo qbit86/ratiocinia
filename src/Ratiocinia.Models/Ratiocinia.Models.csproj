@@ -12,7 +12,11 @@
     <FileVersion>$(VersionPrefix)</FileVersion>
     <NoWarn Condition="'$(Configuration)' == 'Debug' OR '$(VersionSuffix)' != ''">$(NoWarn);CS1591</NoWarn>
     <RootNamespace>Ratiocinia.Models</RootNamespace>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net9.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion Condition="'$(TargetFramework)' == 'net9.0'">13</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
