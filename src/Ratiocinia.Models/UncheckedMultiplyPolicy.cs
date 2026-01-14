@@ -3,6 +3,11 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
 
+    /// <summary>
+    /// Provides arithmetic policy implementations with unchecked multiplication semantics for type <typeparamref name="T" />.
+    /// Arithmetic operations are performed in an unchecked context and may silently overflow.
+    /// </summary>
+    /// <typeparam name="T">The numeric type for which arithmetic operations are provided.</typeparam>
     public sealed class UncheckedMultiplyPolicy<T> :
         IEquatableGreatestCommonDivisorFunctions<T>,
         IUncheckedDivisionFunctions<T>,
@@ -14,6 +19,9 @@ namespace Ratiocinia.Models
         IModulusOperators<T, T, T>,
         IMultiplyOperators<T, T, T>
     {
+        /// <summary>
+        /// Gets the singleton instance of the <see cref="UncheckedMultiplyPolicy{T}" /> class.
+        /// </summary>
         public static UncheckedMultiplyPolicy<T> Instance { get; } = new();
     }
 }
