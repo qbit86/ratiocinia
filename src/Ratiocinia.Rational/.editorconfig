@@ -1,3 +1,5 @@
 [Rational*.cs]
 dotnet_diagnostic.CA1000.severity = none # Do not declare static members on generic types
+
+[{Rational,BigIntegerRational}*.cs]
 resharper_member_can_be_private_global_highlighting = none # MemberCanBePrivate.Global

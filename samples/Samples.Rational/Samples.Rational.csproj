@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ratiocinia.Rational\Ratiocinia.Rational.csproj" />
-    <ProjectReference Include="..\..\src\Ratiocinia.BigIntegerRational\Ratiocinia.BigIntegerRational.csproj" />
   </ItemGroup>
 
 </Project>
