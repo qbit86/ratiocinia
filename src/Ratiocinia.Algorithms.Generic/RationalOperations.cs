@@ -83,7 +83,7 @@ namespace Ratiocinia.Algorithms.Generic
                 return (leftNumerator, leftDenominator);
 
             var gcd1 = policy.Gcd(leftNumerator, rightNumerator);
-            var gcd2 = policy.Gcd(leftDenominator, rightDenominator);
+            var gcd2 = policy.Gcd(rightDenominator, leftDenominator);
             var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightDenominator, gcd2));
             var denominator =
                 policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightNumerator, gcd1));
@@ -116,7 +116,7 @@ namespace Ratiocinia.Algorithms.Generic
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L571
             var gcd1 = policy.Gcd(leftNumerator, rightDenominator);
-            var gcd2 = policy.Gcd(leftDenominator, rightNumerator);
+            var gcd2 = policy.Gcd(rightNumerator, leftDenominator);
             var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightNumerator, gcd2));
             var denominator =
                 policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightDenominator, gcd1));
