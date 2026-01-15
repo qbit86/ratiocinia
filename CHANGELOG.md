@@ -37,8 +37,8 @@
 - BigIntegerRational: Non-generic `BigIntegerRational` struct for arbitrary precision
 - Rational: Generic `Rational<T>` struct for any `IBinaryInteger<T>` type
 
-[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-algorithms.generic...HEAD
+[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-models...HEAD
 
-[0.1.2]: https://github.com/qbit86/ratiocinia/compare/v0.1.1-rational...v0.1.2-algorithms.generic
+[0.1.2]: https://github.com/qbit86/ratiocinia/compare/v0.1.1-rational...v0.1.2-models
 
 [0.1.1]: https://github.com/qbit86/ratiocinia/releases/tag/v0.1.1-rational
