@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased] - 2026-01-15
+
+### Added
+
+- Algorithms.Generic: `RationalOperations.Reciprocal` for computing a rational multiplicative inverse
+- Algorithms.Specialized: `CheckedRationalOperations.Reciprocal` and `UncheckedRationalOperations.Reciprocal`
+- Rational: Integer factory overloads `Rational.Create<T>(T numerator)` and `BigIntegerRational.Create(BigInteger numerator)`
+- Rational: Utility methods `Rational.Abs`, `Rational.IsInteger`, `Rational.IsNegative`, `Rational.IsPositive`, `Rational.IsZero`
+
+### Fixed
+
+- Algorithms.Generic: Correct GCD reduction in `RationalOperations.Multiply` and `RationalOperations.Divide`
+
+### Changed
+
+- Rational: `BigIntegerRational` is now included in `Ratiocinia.Rational` (project/package layout change)
+
+### Removed
+
+- BigIntegerRational: Standalone `Ratiocinia.BigIntegerRational` project/package (moved into `Ratiocinia.Rational`)
+
 ## [0.1.1] - 2026-01-14
 
 ### Added
