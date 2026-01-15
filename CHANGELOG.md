@@ -4,7 +4,6 @@
 
 ### Added
 
-- Algorithms.Specialized: `CheckedRationalOperations.Reciprocal` and `UncheckedRationalOperations.Reciprocal`
 - Rational: Integer factory overloads `Rational.Create<T>(T numerator)` and `BigIntegerRational.Create(BigInteger numerator)`
 - Rational: Utility methods `Rational.Abs`, `Rational.IsInteger`, `Rational.IsNegative`, `Rational.IsPositive`, `Rational.IsZero`
 
@@ -21,6 +20,7 @@
 ### Added
 
 - Algorithms.Generic: `RationalOperations.Reciprocal` for computing a rational multiplicative inverse
+- Algorithms.Specialized: `CheckedRationalOperations.Reciprocal` and `UncheckedRationalOperations.Reciprocal`
 
 ### Fixed
 
@@ -37,8 +37,8 @@
 - BigIntegerRational: Non-generic `BigIntegerRational` struct for arbitrary precision
 - Rational: Generic `Rational<T>` struct for any `IBinaryInteger<T>` type
 
-[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-models...HEAD
+[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-algorithms.specialized...HEAD
 
-[0.1.2]: https://github.com/qbit86/ratiocinia/compare/v0.1.1-rational...v0.1.2-models
+[0.1.2]: https://github.com/qbit86/ratiocinia/compare/v0.1.1-rational...v0.1.2-algorithms.specialized
 
 [0.1.1]: https://github.com/qbit86/ratiocinia/releases/tag/v0.1.1-rational
