@@ -261,12 +261,11 @@ namespace Ratiocinia
             where TOther : INumberBase<TOther>
         {
             // Checked conversion requires an integral value.
-            if (!value.Denominator.Equals(BigInteger.One) &&
-                !(value.Numerator % value.Denominator).IsZero)
+            // Since the rational is normalized, denominator != 1 means it's not an integer.
+            if (!IsInteger(value))
                 return None(out result);
 
-            var quotient = value.Numerator / value.Denominator;
-            return TOther.TryConvertFromChecked(quotient, out result);
+            return TOther.TryConvertFromChecked(value.Numerator, out result);
         }
 
         /// <summary>
