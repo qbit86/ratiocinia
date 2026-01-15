@@ -124,4 +124,36 @@ public sealed class CheckedAndUncheckedRationalOperationsTests
     [Fact]
     public void Checked_Normalize_overflow_throws()
         => Assert.Throws<OverflowException>(() => CheckedRationalOperations.Normalize(1, int.MinValue));
+
+    [Fact]
+    public void Checked_Divide_one_by_negative_one_returns_negative_one()
+    {
+        (int n, int d) = CheckedRationalOperations.Divide(1, 1, -1, 1);
+        Assert.Equal(-1, n);
+        Assert.Equal(1, d);
+    }
+
+    [Fact]
+    public void Unchecked_Divide_one_by_negative_one_returns_negative_one()
+    {
+        (int n, int d) = UncheckedRationalOperations.Divide(1, 1, -1, 1);
+        Assert.Equal(-1, n);
+        Assert.Equal(1, d);
+    }
+
+    [Fact]
+    public void Checked_Multiply_one_by_negative_one_returns_negative_one()
+    {
+        (int n, int d) = CheckedRationalOperations.Multiply(1, 1, -1, 1);
+        Assert.Equal(-1, n);
+        Assert.Equal(1, d);
+    }
+
+    [Fact]
+    public void Unchecked_Multiply_one_by_negative_one_returns_negative_one()
+    {
+        (int n, int d) = UncheckedRationalOperations.Multiply(1, 1, -1, 1);
+        Assert.Equal(-1, n);
+        Assert.Equal(1, d);
+    }
 }
