@@ -46,18 +46,60 @@ namespace Ratiocinia
             where T : IBinaryInteger<T> =>
             Rational<T>.Create(numerator, denominator);
 
+        /// <summary>
+        /// Returns the absolute value of a rational number.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="value">The rational number to get the absolute value of.</param>
+        /// <returns>The absolute value of <paramref name="value" />.</returns>
         public static Rational<T> Abs<T>(Rational<T> value) where T : IBinaryInteger<T> =>
             Rational<T>.Abs(value);
 
+        /// <summary>
+        /// Determines whether the specified rational number represents an integer value.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="value">The rational number to check.</param>
+        /// <returns>
+        /// <see langword="true" /> if <paramref name="value" /> represents an integer (denominator is 1);
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool IsInteger<T>(Rational<T> value) where T : IBinaryInteger<T> =>
             Rational<T>.IsInteger(value);
 
+        /// <summary>
+        /// Determines whether the specified rational number is negative.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="value">The rational number to check.</param>
+        /// <returns>
+        /// <see langword="true" /> if <paramref name="value" /> is less than zero;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool IsNegative<T>(Rational<T> value) where T : IBinaryInteger<T> =>
             Rational<T>.IsNegative(value);
 
+        /// <summary>
+        /// Determines whether the specified rational number is positive.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="value">The rational number to check.</param>
+        /// <returns>
+        /// <see langword="true" /> if <paramref name="value" /> is greater than zero;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool IsPositive<T>(Rational<T> value) where T : IBinaryInteger<T> =>
             Rational<T>.IsPositive(value);
 
+        /// <summary>
+        /// Determines whether the specified rational number is zero.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="value">The rational number to check.</param>
+        /// <returns>
+        /// <see langword="true" /> if <paramref name="value" /> is equal to zero;
+        /// otherwise, <see langword="false" />.
+        /// </returns>
         public static bool IsZero<T>(Rational<T> value) where T : IBinaryInteger<T> =>
             Rational<T>.IsZero(value);
     }
