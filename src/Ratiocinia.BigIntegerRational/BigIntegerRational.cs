@@ -85,6 +85,13 @@ namespace Ratiocinia
         }
 
         /// <summary>
+        /// Creates a <see cref="BigIntegerRational" /> from the specified integer value.
+        /// </summary>
+        /// <param name="numerator">The integer value to convert to a rational number.</param>
+        /// <returns>A rational number equivalent to numerator/1.</returns>
+        public static BigIntegerRational Create(BigInteger numerator) => UnsafeCreate(numerator, BigInteger.One);
+
+        /// <summary>
         /// Returns a string representation of the rational number using the invariant culture.
         /// </summary>
         /// <returns>A string in the format "numerator/denominator".</returns>

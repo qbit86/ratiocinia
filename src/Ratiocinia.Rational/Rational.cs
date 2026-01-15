@@ -47,6 +47,16 @@ namespace Ratiocinia
             Rational<T>.Create(numerator, denominator);
 
         /// <summary>
+        /// Creates a <see cref="Rational{T}" /> from the specified integer value.
+        /// </summary>
+        /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
+        /// <param name="numerator">The integer value to convert to a rational number.</param>
+        /// <returns>A rational number equivalent to numerator/1.</returns>
+        public static Rational<T> Create<T>(T numerator)
+            where T : IBinaryInteger<T> =>
+            Rational<T>.Create(numerator);
+
+        /// <summary>
         /// Returns the absolute value of a rational number.
         /// </summary>
         /// <typeparam name="T">The underlying integer type for the numerator and denominator.</typeparam>
@@ -182,6 +192,13 @@ namespace Ratiocinia
                 CheckedRationalOperations.Normalize(numerator, denominator);
             return UnsafeCreate(normalizedNumerator, normalizedDenominator);
         }
+
+        /// <summary>
+        /// Creates a <see cref="Rational{T}" /> from the specified integer value.
+        /// </summary>
+        /// <param name="numerator">The integer value to convert to a rational number.</param>
+        /// <returns>A rational number equivalent to numerator/1.</returns>
+        public static Rational<T> Create(T numerator) => UnsafeCreate(numerator, T.One);
 
         /// <summary>
         /// Returns a string representation of the rational number using the invariant culture.
