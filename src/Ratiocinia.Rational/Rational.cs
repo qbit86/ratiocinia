@@ -45,6 +45,21 @@ namespace Ratiocinia
         public static Rational<T> Create<T>(T numerator, T denominator)
             where T : IBinaryInteger<T> =>
             Rational<T>.Create(numerator, denominator);
+
+        public static Rational<T> Abs<T>(Rational<T> value) where T : IBinaryInteger<T> =>
+            Rational<T>.Abs(value);
+
+        public static bool IsInteger<T>(Rational<T> value) where T : IBinaryInteger<T> =>
+            Rational<T>.IsInteger(value);
+
+        public static bool IsNegative<T>(Rational<T> value) where T : IBinaryInteger<T> =>
+            Rational<T>.IsNegative(value);
+
+        public static bool IsPositive<T>(Rational<T> value) where T : IBinaryInteger<T> =>
+            Rational<T>.IsPositive(value);
+
+        public static bool IsZero<T>(Rational<T> value) where T : IBinaryInteger<T> =>
+            Rational<T>.IsZero(value);
     }
 
     /// <summary>
