@@ -16,6 +16,10 @@ generated_code = true
 ij_formatter_enabled = false
 indent_style = tab
 
+[README.md]
+generated_code = true
+ij_formatter_enabled = false
+
 [Directory.Packages.props]
 insert_final_newline = false
 

@@ -45,6 +45,38 @@ public sealed class RationalTests
         Assert.Equal(1, r.Denominator);
     }
 
+    [Fact]
+    public void Create_with_single_value_creates_integer_rational()
+    {
+        var r = Rational.Create(5);
+        Assert.Equal(5, r.Numerator);
+        Assert.Equal(1, r.Denominator);
+    }
+
+    [Fact]
+    public void Create_with_single_negative_value_creates_integer_rational()
+    {
+        var r = Rational.Create(-3);
+        Assert.Equal(-3, r.Numerator);
+        Assert.Equal(1, r.Denominator);
+    }
+
+    [Fact]
+    public void Create_with_single_zero_value_creates_zero_rational()
+    {
+        var r = Rational.Create(0);
+        Assert.Equal(0, r.Numerator);
+        Assert.Equal(1, r.Denominator);
+    }
+
+    [Fact]
+    public void RationalT_Create_with_single_value_creates_integer_rational()
+    {
+        var r = Rational<int>.Create(7);
+        Assert.Equal(7, r.Numerator);
+        Assert.Equal(1, r.Denominator);
+    }
+
     #endregion
 
     #region Default Value

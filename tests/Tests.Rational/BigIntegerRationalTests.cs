@@ -46,6 +46,30 @@ public sealed class BigIntegerRationalTests
         Assert.Equal(BigInteger.One, r.Denominator);
     }
 
+    [Fact]
+    public void Create_with_single_value_creates_integer_rational()
+    {
+        var r = BigIntegerRational.Create(5);
+        Assert.Equal(new BigInteger(5), r.Numerator);
+        Assert.Equal(BigInteger.One, r.Denominator);
+    }
+
+    [Fact]
+    public void Create_with_single_negative_value_creates_integer_rational()
+    {
+        var r = BigIntegerRational.Create(-3);
+        Assert.Equal(new BigInteger(-3), r.Numerator);
+        Assert.Equal(BigInteger.One, r.Denominator);
+    }
+
+    [Fact]
+    public void Create_with_single_zero_value_creates_zero_rational()
+    {
+        var r = BigIntegerRational.Create(BigInteger.Zero);
+        Assert.Equal(BigInteger.Zero, r.Numerator);
+        Assert.Equal(BigInteger.One, r.Denominator);
+    }
+
     #endregion
 
     #region Default Value

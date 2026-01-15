@@ -16,18 +16,14 @@ Core algorithms are adapted from [Boost.Rational](https://github.com/boostorg/ra
 Install via NuGet:
 
 ```bash
-# For generic Rational<T> with any IBinaryInteger<T> type
+# For Rational<T> and BigIntegerRational
 dotnet add package Ratiocinia.Rational
-
-# For arbitrary precision BigIntegerRational
-dotnet add package Ratiocinia.BigIntegerRational
 ```
 
 Or via Package Manager Console:
 
 ```powershell
 Install-Package Ratiocinia.Rational
-Install-Package Ratiocinia.BigIntegerRational
 ```
 
 ## Quick Start
@@ -35,7 +31,7 @@ Install-Package Ratiocinia.BigIntegerRational
 ### Using Rational&lt;T&gt;
 
 ```csharp
-using Ratiocinia.Rational;
+using Ratiocinia;
 
 // Create rational numbers (automatically normalized)
 var half = Rational.Create(1, 2);
@@ -62,7 +58,7 @@ bool isPositive = Rational<int>.IsPositive(half);   // true
 ### Using BigIntegerRational
 
 ```csharp
-using Ratiocinia.BigIntegerRational;
+using Ratiocinia;
 using System.Numerics;
 
 // Create from BigInteger values
@@ -91,8 +87,6 @@ graph BT
   Models["Models"]
   AlgorithmsSpecialized["Algorithms.Specialized"]
   Rational["Rational"]
-  BigIntegerRational["BigIntegerRational"]
-
   AlgorithmsGeneric --> Abstractions
   Models --> AlgorithmsGeneric
   Models --> Abstractions
@@ -100,8 +94,6 @@ graph BT
   AlgorithmsSpecialized --> Models
   Rational --> AlgorithmsSpecialized
   Rational --> Models
-  BigIntegerRational --> AlgorithmsSpecialized
-  BigIntegerRational --> Models
 ```
 
 ### Projects
@@ -112,8 +104,7 @@ graph BT
 | **Ratiocinia.Algorithms.Generic** | Policy-based rational arithmetic algorithms |
 | **Ratiocinia.Models** | Checked/unchecked arithmetic policy implementations |
 | **Ratiocinia.Algorithms.Specialized** | Convenience wrappers using .NET generic math |
-| **Ratiocinia.Rational** | Generic `Rational<T>` struct |
-| **Ratiocinia.BigIntegerRational** | Arbitrary precision `BigIntegerRational` struct |
+| **Ratiocinia.Rational** | `Rational<T>` and `BigIntegerRational` structs |
 
 ### Design Principles
 

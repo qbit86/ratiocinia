@@ -83,7 +83,7 @@ namespace Ratiocinia.Algorithms.Generic
                 return (leftNumerator, leftDenominator);
 
             var gcd1 = policy.Gcd(leftNumerator, rightNumerator);
-            var gcd2 = policy.Gcd(leftDenominator, rightDenominator);
+            var gcd2 = policy.Gcd(rightDenominator, leftDenominator);
             var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightDenominator, gcd2));
             var denominator =
                 policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightNumerator, gcd1));
@@ -116,7 +116,7 @@ namespace Ratiocinia.Algorithms.Generic
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L571
             var gcd1 = policy.Gcd(leftNumerator, rightDenominator);
-            var gcd2 = policy.Gcd(leftDenominator, rightNumerator);
+            var gcd2 = policy.Gcd(rightNumerator, leftDenominator);
             var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightNumerator, gcd2));
             var denominator =
                 policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightDenominator, gcd1));
@@ -166,6 +166,37 @@ namespace Ratiocinia.Algorithms.Generic
         public static (T Numerator, T Denominator) Negate<T, TPolicy>(T numerator, T denominator, TPolicy policy)
             where TPolicy : IUnaryNegationFunctions<T> =>
             (policy.Negate(numerator), denominator);
+
+        /// <summary>
+        /// Computes the reciprocal (multiplicative inverse) of a rational number.
+        /// </summary>
+        /// <typeparam name="T">The type of the numerator and denominator values.</typeparam>
+        /// <typeparam name="TAdditiveIdentity">The type representing the additive identity (zero), which must be comparable to <typeparamref name="T" />.</typeparam>
+        /// <typeparam name="TPolicy">The policy type providing the unary negation operation.</typeparam>
+        /// <param name="numerator">The numerator of the rational number.</param>
+        /// <param name="denominator">The denominator of the rational number.</param>
+        /// <param name="additiveIdentity">The additive identity (zero) used for comparisons.</param>
+        /// <param name="policy">The policy providing the negation operation.</param>
+        /// <returns>A tuple containing the numerator and denominator of the reciprocal in normalized form.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="numerator" /> is zero.</exception>
+        public static (T Numerator, T Denominator) Reciprocal<T, TAdditiveIdentity, TPolicy>(
+            T numerator,
+            T denominator,
+            TAdditiveIdentity additiveIdentity,
+            TPolicy policy)
+            where TAdditiveIdentity : IComparable<T>
+            where TPolicy : IUnaryNegationFunctions<T>
+        {
+            Debug.Assert(additiveIdentity.CompareTo(denominator) < 0);
+
+            if (additiveIdentity.CompareTo(numerator) is 0)
+                throw new ArgumentOutOfRangeException(nameof(numerator));
+
+            if (additiveIdentity.CompareTo(numerator) > 0)
+                return (policy.Negate(denominator), policy.Negate(numerator));
+
+            return (denominator, numerator);
+        }
 
         /// <summary>
         /// Normalizes a rational number to its canonical form.
