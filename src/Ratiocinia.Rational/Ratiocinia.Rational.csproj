@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Generic Rational&lt;T&gt; for any IBinaryInteger&lt;T&gt;, fully integrated with .NET generic math.</Description>
+    <Description>Generic Rational&lt;T&gt; for any IBinaryInteger&lt;T&gt;, fully integrated with .NET generic math. Arbitrary-precision rational arithmetic via BigIntegerRational.</Description>
     <PackageTags>fraction;generic-math;numeric;rational</PackageTags>
     <Title>Rational&lt;T&gt;</Title>
     <VersionSuffix>preview</VersionSuffix>
