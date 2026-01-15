@@ -112,6 +112,21 @@ namespace Ratiocinia.Algorithms.Specialized
             RationalOperations.Negate(numerator, denominator, CheckedUnaryNegationPolicy<T>.Instance);
 
         /// <summary>
+        /// Computes the reciprocal (multiplicative inverse) of a rational number with overflow checking.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the numerator and denominator.</typeparam>
+        /// <param name="numerator">The numerator of the rational number.</param>
+        /// <param name="denominator">The denominator of the rational number.</param>
+        /// <returns>A tuple containing the numerator and denominator of the reciprocal in normalized form.</returns>
+        public static (T Numerator, T Denominator) Reciprocal<T>(T numerator, T denominator)
+            where T :
+            IAdditiveIdentity<T, T>,
+            IComparable<T>,
+            IUnaryNegationOperators<T, T> =>
+            RationalOperations.Reciprocal(
+                numerator, denominator, T.AdditiveIdentity, CheckedUnaryNegationPolicy<T>.Instance);
+
+        /// <summary>
         /// Normalizes a rational number by reducing it to lowest terms and ensuring the denominator is positive, with overflow checking.
         /// </summary>
         /// <typeparam name="T">The numeric type of the numerator and denominator.</typeparam>
