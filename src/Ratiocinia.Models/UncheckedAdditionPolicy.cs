@@ -12,14 +12,15 @@ namespace Ratiocinia.Models
         IUncheckedAdditionFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,
-        IEquatableGreatestCommonDivisorFunctions<T>
+        IComparableGreatestCommonDivisorFunctions<T>
         where T :
         IAdditionOperators<T, T, T>,
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
-        IEquatable<T>,
+        IComparable<T>,
         IModulusOperators<T, T, T>,
-        IMultiplyOperators<T, T, T>
+        IMultiplyOperators<T, T, T>,
+        IUnaryNegationOperators<T, T>
     {
         /// <summary>
         /// Gets the singleton instance of the <see cref="UncheckedAdditionPolicy{T}" /> class.

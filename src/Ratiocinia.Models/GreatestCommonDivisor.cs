@@ -10,15 +10,6 @@ namespace Ratiocinia.Models
             where T : IAdditiveIdentity<T, T>, IComparable<T>, IUnaryNegationOperators<T, T> =>
             T.AdditiveIdentity.CompareTo(value) > 0 ? -value : value;
 
-        internal static T GcdEquatable<T>(T left, T right)
-            where T : IAdditiveIdentity<T, T>, IEquatable<T>, IModulusOperators<T, T, T> =>
-            Gcd(left, right, T.AdditiveIdentity);
-
-        internal static T GcdEquatable<T, TEquatable>(T left, T right, TEquatable identity)
-            where T : IModulusOperators<T, T, T>
-            where TEquatable : IEquatable<T> =>
-            Gcd(left, right, identity);
-
         internal static T GcdComparable<T>(T left, T right)
             where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>, IUnaryNegationOperators<T, T>
         {

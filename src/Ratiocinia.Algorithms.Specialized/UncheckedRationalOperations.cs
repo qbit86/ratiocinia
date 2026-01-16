@@ -28,9 +28,10 @@ namespace Ratiocinia.Algorithms.Specialized
             IAdditionOperators<T, T, T>,
             IAdditiveIdentity<T, T>,
             IDivisionOperators<T, T, T>,
-            IEquatable<T>,
+            IComparable<T>,
             IModulusOperators<T, T, T>,
-            IMultiplyOperators<T, T, T> =>
+            IMultiplyOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
             RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 UncheckedAdditionPolicy<T>.Instance);
@@ -72,9 +73,10 @@ namespace Ratiocinia.Algorithms.Specialized
             where T :
             IAdditiveIdentity<T, T>,
             IDivisionOperators<T, T, T>,
-            IEquatable<T>,
+            IComparable<T>,
             IModulusOperators<T, T, T>,
-            IMultiplyOperators<T, T, T> =>
+            IMultiplyOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
             RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 UncheckedMultiplyPolicy<T>.Instance);
@@ -93,10 +95,11 @@ namespace Ratiocinia.Algorithms.Specialized
             where T :
             IAdditiveIdentity<T, T>,
             IDivisionOperators<T, T, T>,
-            IEquatable<T>,
+            IComparable<T>,
             IModulusOperators<T, T, T>,
             IMultiplyOperators<T, T, T>,
-            ISubtractionOperators<T, T, T> =>
+            ISubtractionOperators<T, T, T>,
+            IUnaryNegationOperators<T, T> =>
             RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 UncheckedSubtractionPolicy<T>.Instance);

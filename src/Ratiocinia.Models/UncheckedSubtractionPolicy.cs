@@ -9,17 +9,18 @@ namespace Ratiocinia.Models
     /// </summary>
     /// <typeparam name="T">The numeric type for which arithmetic operations are provided.</typeparam>
     public sealed class UncheckedSubtractionPolicy<T> :
-        IEquatableGreatestCommonDivisorFunctions<T>,
+        IComparableGreatestCommonDivisorFunctions<T>,
         IUncheckedDivisionFunctions<T>,
         IUncheckedMultiplyFunctions<T>,
         IUncheckedSubtractionFunctions<T>
         where T :
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
-        IEquatable<T>,
+        IComparable<T>,
         IModulusOperators<T, T, T>,
         IMultiplyOperators<T, T, T>,
-        ISubtractionOperators<T, T, T>
+        ISubtractionOperators<T, T, T>,
+        IUnaryNegationOperators<T, T>
     {
         /// <summary>
         /// Gets the singleton instance of the <see cref="UncheckedSubtractionPolicy{T}" /> class.
