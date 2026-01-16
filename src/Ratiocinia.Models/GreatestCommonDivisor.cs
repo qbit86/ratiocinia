@@ -43,7 +43,7 @@ namespace Ratiocinia.Models
 #endif
         {
             var policy = NumericModulusFunctions<T>.Instance;
-            return Algorithms.Generic.GreatestCommonDivisor.Gcd(left, right, identity, policy);
+            return Algorithms.Generic.GreatestCommonDivisor.EuclideanGcd(left, right, identity, policy);
         }
     }
 
