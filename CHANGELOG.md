@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased] - 2026-01-16
+
+### Changed
+
+- Algorithms.Generic: `Gcd` method renamed to `EuclideanGcd`
+- Models: GCD-related interfaces and methods now use `IComparable<T>` constraint instead of `IEquatable<T>`
+- Models: GCD methods now handle negative values correctly
+
+### Removed
+
+- Models: `IEquatableGreatestCommonDivisorFunctions` interface (replaced by `IComparableGreatestCommonDivisorFunctions`)
+
 ## [0.1.2] - 2026-01-15
 
 ### Added
