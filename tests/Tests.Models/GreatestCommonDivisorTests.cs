@@ -10,6 +10,10 @@ public sealed class GreatestCommonDivisorTests
     {
         { 48, 18, 6 },
         { 18, 48, 6 },
+        { 6, 15, 3 },
+        { -6, 15, 3 },
+        { 6, -15, 3 },
+        { -6, -15, 3 },
         { 5, 0, 5 },
         { 0, 5, 5 },
         { 0, 0, 0 }
@@ -37,6 +41,9 @@ public sealed class GreatestCommonDivisorTests
         AssertGcdMagnitudeAndDivisibility(-48, 18, 6);
         AssertGcdMagnitudeAndDivisibility(48, -18, 6);
         AssertGcdMagnitudeAndDivisibility(-48, -18, 6);
+        AssertGcdMagnitudeAndDivisibility(-6, 15, 3);
+        AssertGcdMagnitudeAndDivisibility(6, -15, 3);
+        AssertGcdMagnitudeAndDivisibility(-6, -15, 3);
     }
 
     [Fact]
