@@ -6,6 +6,10 @@ namespace Ratiocinia.Models
 
     internal static class GreatestCommonDivisor
     {
+        private static T Abs<T>(T value)
+            where T : IAdditiveIdentity<T, T>, IComparable<T>, IUnaryNegationOperators<T, T> =>
+            T.AdditiveIdentity.CompareTo(value) > 0 ? -value : value;
+
         internal static T GcdEquatable<T>(T left, T right)
             where T : IAdditiveIdentity<T, T>, IEquatable<T>, IModulusOperators<T, T, T> =>
             Gcd(left, right, T.AdditiveIdentity);
@@ -16,23 +20,23 @@ namespace Ratiocinia.Models
             Gcd(left, right, identity);
 
         internal static T GcdComparable<T>(T left, T right)
-            where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>
+            where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>, IUnaryNegationOperators<T, T>
         {
             var equatable = ComparableEquatableFactory<T>.Create(T.AdditiveIdentity);
-            return Gcd(left, right, equatable);
+            return Gcd(Abs(left), Abs(right), equatable);
         }
 
         internal static T GcdComparable<T, TComparable>(T left, T right, TComparable identity)
-            where T : IModulusOperators<T, T, T>
+            where T : IAdditiveIdentity<T, T>, IComparable<T>, IModulusOperators<T, T, T>, IUnaryNegationOperators<T, T>
             where TComparable : IComparable<T>
         {
             var equatable = ComparableEquatableFactory<T>.Create(identity);
-            return Gcd(left, right, equatable);
+            return Gcd(Abs(left), Abs(right), equatable);
         }
 
         internal static T GcdNumberBase<T>(T left, T right)
             where T : IModulusOperators<T, T, T>, INumberBase<T> =>
-            Gcd(left, right, default(IsZeroEquatable<T>));
+            Gcd(T.Abs(left), T.Abs(right), default(IsZeroEquatable<T>));
 
         private static T Gcd<T, TEquatable>(T left, T right, TEquatable identity)
             where T : IModulusOperators<T, T, T>
