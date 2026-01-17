@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3] - 2026-01-16
+
+### Changed
+
+- Algorithms.Generic: `Gcd` method renamed to `EuclideanGcd`
+- Models: GCD-related interfaces and methods now use `IComparable<T>` constraint instead of `IEquatable<T>`
+- Models: GCD methods now handle negative values correctly
+
+### Removed
+
+- Models: `IEquatableGreatestCommonDivisorFunctions` interface (replaced by `IComparableGreatestCommonDivisorFunctions`)
+
 ## [0.1.2] - 2026-01-15
 
 ### Added
@@ -32,7 +44,9 @@
 - BigIntegerRational: Non-generic `BigIntegerRational` struct for arbitrary precision
 - Rational: Generic `Rational<T>` struct for any `IBinaryInteger<T>` type
 
-[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-rational...HEAD
+[Unreleased]: https://github.com/qbit86/ratiocinia/compare/v0.1.3-algorithms.generic...HEAD
+
+[0.1.3]: https://github.com/qbit86/ratiocinia/compare/v0.1.2-rational...v0.1.3-algorithms.generic
 
 [0.1.2]: https://github.com/qbit86/ratiocinia/compare/v0.1.1-rational...v0.1.2-rational
 

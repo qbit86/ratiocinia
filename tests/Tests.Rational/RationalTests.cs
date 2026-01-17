@@ -158,6 +158,16 @@ public sealed class RationalTests
     }
 
     [Fact]
+    public void Multiplication_operator_multiplies_negative_fractions()
+    {
+        var a = Rational.Create<long>(-1, 1);
+        var b = Rational.Create<long>(-1, 2);
+        var result = a * b;
+        Assert.Equal(1, result.Numerator);
+        Assert.Equal(2, result.Denominator);
+    }
+
+    [Fact]
     public void Division_operator_divides_fractions()
     {
         var a = Rational.Create(1, 2);

@@ -12,14 +12,15 @@ namespace Ratiocinia.Models
         ICheckedAdditionFunctions<T>,
         ICheckedDivisionFunctions<T>,
         ICheckedMultiplyFunctions<T>,
-        IEquatableGreatestCommonDivisorFunctions<T>
+        IComparableGreatestCommonDivisorFunctions<T>
         where T :
         IAdditionOperators<T, T, T>,
         IAdditiveIdentity<T, T>,
         IDivisionOperators<T, T, T>,
-        IEquatable<T>,
+        IComparable<T>,
         IModulusOperators<T, T, T>,
-        IMultiplyOperators<T, T, T>
+        IMultiplyOperators<T, T, T>,
+        IUnaryNegationOperators<T, T>
     {
         /// <summary>
         /// Gets the singleton instance of the <see cref="CheckedAdditionPolicy{T}" /> class.

@@ -210,7 +210,7 @@ namespace Ratiocinia.Algorithms.Generic
         /// <param name="multiplicativeIdentity">The multiplicative identity (one) value.</param>
         /// <param name="additiveIdentityComparable">The additive identity used for comparisons.</param>
         /// <param name="policy">The policy providing arithmetic operations.</param>
-        /// <returns>A tuple containing the normalized numerator and denominator, reduced to lowest terms with a positive denominator.</returns>
+        /// <returns>A tuple containing the normalized numerator and denominator, reduced to the lowest terms with a positive denominator.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="denominator" /> is zero.</exception>
         /// <remarks>
         /// Normalization ensures:
@@ -219,7 +219,7 @@ namespace Ratiocinia.Algorithms.Generic
         /// <description>The denominator is always positive.</description>
         /// </item>
         /// <item>
-        /// <description>The numerator and denominator are reduced to lowest terms (GCD is 1).</description>
+        /// <description>The numerator and denominator are reduced to the lowest terms (GCD is 1).</description>
         /// </item>
         /// <item>
         /// <description>Zero is represented as 0/1.</description>

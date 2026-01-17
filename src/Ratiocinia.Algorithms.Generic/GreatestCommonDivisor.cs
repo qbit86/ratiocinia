@@ -18,7 +18,8 @@ namespace Ratiocinia.Algorithms.Generic
         /// <param name="identity">The additive identity (zero) used to detect termination.</param>
         /// <param name="policy">The policy providing arithmetic operations.</param>
         /// <returns>The greatest common divisor of <paramref name="left" /> and <paramref name="right" />.</returns>
-        public static T Gcd<T, TAdditiveIdentity, TPolicy>(
+        /// <remarks>This method assumes both <paramref name="left" /> and <paramref name="right" /> are positive.</remarks>
+        public static T EuclideanGcd<T, TAdditiveIdentity, TPolicy>(
             T left, T right, TAdditiveIdentity identity, TPolicy policy)
 #if NET9_0_OR_GREATER
             where TAdditiveIdentity : IEquatable<T>, allows ref struct

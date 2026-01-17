@@ -10,15 +10,14 @@ public sealed class GreatestCommonDivisorTests
     {
         { 48, 18, 6 },
         { 18, 48, 6 },
+        { 6, 15, 3 },
+        { -6, 15, 3 },
+        { 6, -15, 3 },
+        { -6, -15, 3 },
         { 5, 0, 5 },
         { 0, 5, 5 },
         { 0, 0, 0 }
     };
-
-    [Theory]
-    [MemberData(nameof(Int32Cases))]
-    public void GcdEquatable_int_returns_expected(int left, int right, int expected)
-        => Assert.Equal(expected, GreatestCommonDivisor.GcdEquatable(left, right));
 
     [Theory]
     [MemberData(nameof(Int32Cases))]
@@ -37,6 +36,9 @@ public sealed class GreatestCommonDivisorTests
         AssertGcdMagnitudeAndDivisibility(-48, 18, 6);
         AssertGcdMagnitudeAndDivisibility(48, -18, 6);
         AssertGcdMagnitudeAndDivisibility(-48, -18, 6);
+        AssertGcdMagnitudeAndDivisibility(-6, 15, 3);
+        AssertGcdMagnitudeAndDivisibility(6, -15, 3);
+        AssertGcdMagnitudeAndDivisibility(-6, -15, 3);
     }
 
     [Fact]
@@ -49,14 +51,6 @@ public sealed class GreatestCommonDivisorTests
     }
 
     [Fact]
-    public void GcdEquatable_uses_supplied_identity_equatable()
-    {
-        // If "right" is considered the identity, the algorithm returns "left" immediately.
-        int result = GreatestCommonDivisor.GcdEquatable(10, 6, new TreatSixAsIdentityEquatable());
-        Assert.Equal(10, result);
-    }
-
-    [Fact]
     public void GcdComparable_uses_supplied_identity_comparable()
     {
         // If "right" compares equal to the identity, the algorithm returns "left" immediately.
@@ -66,7 +60,7 @@ public sealed class GreatestCommonDivisorTests
 
     private static void AssertGcdMagnitudeAndDivisibility(int left, int right, int expectedMagnitude)
     {
-        int gcd = GreatestCommonDivisor.GcdEquatable(left, right);
+        int gcd = GreatestCommonDivisor.GcdComparable(left, right);
 
         Assert.Equal(expectedMagnitude, Math.Abs(gcd));
 
@@ -75,9 +69,10 @@ public sealed class GreatestCommonDivisorTests
         Assert.Equal(0, right % gcd);
     }
 
-    private readonly struct TreatSixAsIdentityEquatable : IEquatable<int>
+    private readonly struct TreatSixAsIdentityEquatable : IEquatable<int>, IComparable<int>
     {
-        public bool Equals(int other) => other is 6;
+        public bool Equals(int other) => CompareTo(other) is 0;
+        public int CompareTo(int other) => 6.CompareTo(other);
     }
 
     private readonly struct TreatSixAsIdentityComparable : IComparable<int>
