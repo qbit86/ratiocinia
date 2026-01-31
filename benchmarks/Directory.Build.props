@@ -3,6 +3,5 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn);CA1014</NoWarn>
-    <LangVersion>14</LangVersion>
   </PropertyGroup>
 </Project>
