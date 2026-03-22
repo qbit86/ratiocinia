@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratiocinia.Abstractions", "src\Ratiocinia.Abstractions\Ratiocinia.Abstractions.csproj", "{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratiocinia.Algorithms.Generic", "src\Ratiocinia.Algorithms.Generic\Ratiocinia.Algorithms.Generic.csproj", "{6915BBD0-7F4C-4711-B2E2-15D98B4E054A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratiocinia.Models", "src\Ratiocinia.Models\Ratiocinia.Models.csproj", "{2AF6E1F6-B15F-4588-B129-B29C32458E97}"
@@ -51,18 +49,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|x64.Build.0 = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Debug|x86.Build.0 = Debug|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|x64.ActiveCfg = Release|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|x64.Build.0 = Release|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|x86.ActiveCfg = Release|Any CPU
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32}.Release|x86.Build.0 = Release|Any CPU
 		{6915BBD0-7F4C-4711-B2E2-15D98B4E054A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6915BBD0-7F4C-4711-B2E2-15D98B4E054A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6915BBD0-7F4C-4711-B2E2-15D98B4E054A}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -176,7 +162,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3EC2E7E4-FF0D-46CA-A624-7EB669871E32} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{6915BBD0-7F4C-4711-B2E2-15D98B4E054A} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{2AF6E1F6-B15F-4588-B129-B29C32458E97} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{6B423C8F-7A47-4264-BA5A-F47D50DB5576} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
