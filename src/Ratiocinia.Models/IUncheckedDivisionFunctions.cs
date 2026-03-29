@@ -1,16 +1,16 @@
 namespace Ratiocinia.Models
 {
     using System.Numerics;
-
+    using MathFoundations;
     /// <summary>
-    /// Provides a default implementation of <see cref="IDivisionFunctions{T}" /> that performs
+    /// Provides a default implementation of <see cref="IDivideTruncated{T}" /> that performs
     /// division in an unchecked context, allowing silent overflow.
     /// </summary>
     /// <typeparam name="T">The numeric type supporting division operations.</typeparam>
-    public interface IUncheckedDivisionFunctions<T> : IDivisionFunctions<T>
+    public interface IUncheckedDivisionFunctions<T> : IDivideTruncated<T>
         where T : IDivisionOperators<T, T, T>
     {
         /// <inheritdoc />
-        T IDivisionFunctions<T>.Divide(T left, T right) => left / right;
+        T IDivideTruncated<T>.DivideTruncated(T left, T right) => left / right;
     }
 }

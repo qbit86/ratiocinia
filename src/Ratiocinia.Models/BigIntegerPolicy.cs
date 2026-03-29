@@ -1,6 +1,7 @@
 namespace Ratiocinia.Models
 {
     using System.Numerics;
+    using MathFoundations;
 
     /// <summary>
     /// Provides arithmetic policy implementations for <see cref="BigInteger" /> values,
@@ -9,7 +10,7 @@ namespace Ratiocinia.Models
     public sealed class BigIntegerPolicy :
         IBinaryDivRemFunctions<BigInteger>,
         IComparableComparer<BigInteger>,
-        IGreatestCommonDivisorFunctions<BigInteger>,
+        IGcd<BigInteger>,
         INumberBaseAbsoluteFunctions<BigInteger>,
         INumericModulusFunctions<BigInteger>,
         IUncheckedAdditionFunctions<BigInteger>,

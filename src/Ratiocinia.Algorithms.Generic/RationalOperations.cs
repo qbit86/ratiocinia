@@ -3,6 +3,7 @@ namespace Ratiocinia.Algorithms.Generic
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using MathFoundations;
 
     /// <summary>
     /// Provides generic arithmetic operations for rational numbers represented as numerator/denominator pairs.
@@ -28,20 +29,20 @@ namespace Ratiocinia.Algorithms.Generic
         public static (T Numerator, T Denominator) Add<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
-            IAdditionFunctions<T>,
-            IDivisionFunctions<T>,
-            IGreatestCommonDivisorFunctions<T>,
-            IMultiplyFunctions<T>
+            IAdd<T>,
+            IDivideTruncated<T>,
+            IGcd<T>,
+            IMultiply<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L517
             var gcd = policy.Gcd(leftDenominator, rightDenominator);
-            leftDenominator = policy.Divide(leftDenominator, gcd);
+            leftDenominator = policy.DivideTruncated(leftDenominator, gcd);
             leftNumerator = policy.Add(
-                policy.Multiply(leftNumerator, policy.Divide(rightDenominator, gcd)),
+                policy.Multiply(leftNumerator, policy.DivideTruncated(rightDenominator, gcd)),
                 policy.Multiply(rightNumerator, leftDenominator));
             gcd = policy.Gcd(leftNumerator, gcd);
-            var numerator = policy.Divide(leftNumerator, gcd);
-            var denominator = policy.Multiply(leftDenominator, policy.Divide(rightDenominator, gcd));
+            var numerator = policy.DivideTruncated(leftNumerator, gcd);
+            var denominator = policy.Multiply(leftDenominator, policy.DivideTruncated(rightDenominator, gcd));
             return (numerator, denominator);
         }
 
@@ -68,10 +69,10 @@ namespace Ratiocinia.Algorithms.Generic
             TPolicy policy)
             where TAdditiveIdentity : IComparable<T>
             where TPolicy :
-            IDivisionFunctions<T>,
-            IGreatestCommonDivisorFunctions<T>,
-            IMultiplyFunctions<T>,
-            IUnaryNegationFunctions<T>
+            IDivideTruncated<T>,
+            IGcd<T>,
+            IMultiply<T>,
+            INegate<T>
         {
             Debug.Assert(additiveIdentity.CompareTo(leftDenominator) < 0);
             Debug.Assert(additiveIdentity.CompareTo(rightDenominator) < 0);
@@ -84,9 +85,10 @@ namespace Ratiocinia.Algorithms.Generic
 
             var gcd1 = policy.Gcd(leftNumerator, rightNumerator);
             var gcd2 = policy.Gcd(rightDenominator, leftDenominator);
-            var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightDenominator, gcd2));
-            var denominator =
-                policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightNumerator, gcd1));
+            var numerator = policy.Multiply(
+                policy.DivideTruncated(leftNumerator, gcd1), policy.DivideTruncated(rightDenominator, gcd2));
+            var denominator = policy.Multiply(
+                policy.DivideTruncated(leftDenominator, gcd2), policy.DivideTruncated(rightNumerator, gcd1));
             if (additiveIdentity.CompareTo(denominator) > 0)
             {
                 numerator = policy.Negate(numerator);
@@ -110,16 +112,17 @@ namespace Ratiocinia.Algorithms.Generic
         public static (T Numerator, T Denominator) Multiply<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
-            IDivisionFunctions<T>,
-            IGreatestCommonDivisorFunctions<T>,
-            IMultiplyFunctions<T>
+            IDivideTruncated<T>,
+            IGcd<T>,
+            IMultiply<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L571
             var gcd1 = policy.Gcd(leftNumerator, rightDenominator);
             var gcd2 = policy.Gcd(rightNumerator, leftDenominator);
-            var numerator = policy.Multiply(policy.Divide(leftNumerator, gcd1), policy.Divide(rightNumerator, gcd2));
-            var denominator =
-                policy.Multiply(policy.Divide(leftDenominator, gcd2), policy.Divide(rightDenominator, gcd1));
+            var numerator = policy.Multiply(
+                policy.DivideTruncated(leftNumerator, gcd1), policy.DivideTruncated(rightNumerator, gcd2));
+            var denominator = policy.Multiply(
+                policy.DivideTruncated(leftDenominator, gcd2), policy.DivideTruncated(rightDenominator, gcd1));
             return (numerator, denominator);
         }
 
@@ -137,20 +140,20 @@ namespace Ratiocinia.Algorithms.Generic
         public static (T Numerator, T Denominator) Subtract<T, TPolicy>(
             T leftNumerator, T leftDenominator, T rightNumerator, T rightDenominator, TPolicy policy)
             where TPolicy :
-            IDivisionFunctions<T>,
-            IGreatestCommonDivisorFunctions<T>,
-            IMultiplyFunctions<T>,
-            ISubtractionFunctions<T>
+            IDivideTruncated<T>,
+            IGcd<T>,
+            IMultiply<T>,
+            ISubtract<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L552
             var gcd = policy.Gcd(leftDenominator, rightDenominator);
-            leftDenominator = policy.Divide(leftDenominator, gcd);
+            leftDenominator = policy.DivideTruncated(leftDenominator, gcd);
             leftNumerator = policy.Subtract(
-                policy.Multiply(leftNumerator, policy.Divide(rightDenominator, gcd)),
+                policy.Multiply(leftNumerator, policy.DivideTruncated(rightDenominator, gcd)),
                 policy.Multiply(rightNumerator, leftDenominator));
             gcd = policy.Gcd(leftNumerator, gcd);
-            var numerator = policy.Divide(leftNumerator, gcd);
-            var denominator = policy.Multiply(leftDenominator, policy.Divide(rightDenominator, gcd));
+            var numerator = policy.DivideTruncated(leftNumerator, gcd);
+            var denominator = policy.Multiply(leftDenominator, policy.DivideTruncated(rightDenominator, gcd));
             return (numerator, denominator);
         }
 
@@ -164,7 +167,7 @@ namespace Ratiocinia.Algorithms.Generic
         /// <param name="policy">The policy providing the negation operation.</param>
         /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (T Numerator, T Denominator) Negate<T, TPolicy>(T numerator, T denominator, TPolicy policy)
-            where TPolicy : IUnaryNegationFunctions<T> =>
+            where TPolicy : INegate<T> =>
             (policy.Negate(numerator), denominator);
 
         /// <summary>
@@ -185,7 +188,7 @@ namespace Ratiocinia.Algorithms.Generic
             TAdditiveIdentity additiveIdentity,
             TPolicy policy)
             where TAdditiveIdentity : IComparable<T>
-            where TPolicy : IUnaryNegationFunctions<T>
+            where TPolicy : INegate<T>
         {
             Debug.Assert(additiveIdentity.CompareTo(denominator) < 0);
 
@@ -235,9 +238,9 @@ namespace Ratiocinia.Algorithms.Generic
             TPolicy policy)
             where TAdditiveIdentityComparable : IComparable<T>
             where TPolicy :
-            IDivisionFunctions<T>,
-            IGreatestCommonDivisorFunctions<T>,
-            IUnaryNegationFunctions<T>
+            IDivideTruncated<T>,
+            IGcd<T>,
+            INegate<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L886
             if (additiveIdentityComparable.CompareTo(denominator) is 0)
@@ -247,8 +250,8 @@ namespace Ratiocinia.Algorithms.Generic
                 return (additiveIdentity, multiplicativeIdentity);
 
             var gcd = policy.Gcd(numerator, denominator);
-            numerator = policy.Divide(numerator, gcd);
-            denominator = policy.Divide(denominator, gcd);
+            numerator = policy.DivideTruncated(numerator, gcd);
+            denominator = policy.DivideTruncated(denominator, gcd);
 
             if (additiveIdentityComparable.CompareTo(denominator) > 0)
             {
@@ -296,7 +299,7 @@ namespace Ratiocinia.Algorithms.Generic
             TPolicy policy)
             where TAdditiveIdentity : IComparable<T>
             where TMultiplicativeIdentity : IEquatable<T>
-            where TPolicy : IAbsoluteFunctions<T>, IGreatestCommonDivisorFunctions<T>
+            where TPolicy : IAbs<T>, IGcd<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L430
             if (additiveIdentity.CompareTo(denominator) >= 0)
@@ -337,10 +340,10 @@ namespace Ratiocinia.Algorithms.Generic
             T additiveIdentity,
             TPolicy policy)
             where TPolicy :
-            IAdditionFunctions<T>,
+            IAdd<T>,
             IComparer<T>,
-            IDecrementFunctions<T>,
-            IDivRemFunctions<T>
+            IDecrement<T>,
+            IDivRemTruncated<T>
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L785
             // Uses continued fraction expansion via Euclidean algorithm to avoid overflow
@@ -351,10 +354,10 @@ namespace Ratiocinia.Algorithms.Generic
 
             // Initialize continued fraction state for both operands
 
-            var (leftQuotient, leftRemainder) = policy.DivRem(leftNumerator, leftDenominator);
+            var (leftQuotient, leftRemainder) = policy.DivRemTruncated(leftNumerator, leftDenominator);
             ContinuedFractionState<T> left = new(leftDenominator, leftQuotient, leftRemainder);
 
-            var (rightQuotient, rightRemainder) = policy.DivRem(rightNumerator, rightDenominator);
+            var (rightQuotient, rightRemainder) = policy.DivRemTruncated(rightNumerator, rightDenominator);
             ContinuedFractionState<T> right = new(rightDenominator, rightQuotient, rightRemainder);
 
             // Tracks whether a comparison direction should be reversed.
@@ -413,10 +416,10 @@ namespace Ratiocinia.Algorithms.Generic
 
                 // Advance to the next continued fraction term: swap numerator with denominator,
                 // and denominator with the remainder (Euclidean algorithm step)
-                var (nextLeftQuotient, nextLeftRemainder) = policy.DivRem(left.Denominator, left.Remainder);
+                var (nextLeftQuotient, nextLeftRemainder) = policy.DivRemTruncated(left.Denominator, left.Remainder);
                 left = new ContinuedFractionState<T>(left.Remainder, nextLeftQuotient, nextLeftRemainder);
 
-                var (nextRightQuotient, nextRightRemainder) = policy.DivRem(right.Denominator, right.Remainder);
+                var (nextRightQuotient, nextRightRemainder) = policy.DivRemTruncated(right.Denominator, right.Remainder);
                 right = new ContinuedFractionState<T>(right.Remainder, nextRightQuotient, nextRightRemainder);
             }
         }

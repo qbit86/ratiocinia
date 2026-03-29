@@ -1,6 +1,7 @@
 namespace Ratiocinia.Algorithms.Generic
 {
     using System;
+    using MathFoundations;
 
     /// <summary>
     /// Provides a generic implementation of the greatest common divisor (GCD) algorithm.
@@ -23,10 +24,10 @@ namespace Ratiocinia.Algorithms.Generic
             T left, T right, TAdditiveIdentity identity, TPolicy policy)
 #if NET9_0_OR_GREATER
             where TAdditiveIdentity : IEquatable<T>, allows ref struct
-            where TPolicy : IModulusFunctions<T>, allows ref struct
+            where TPolicy : IRemainderEuclidean<T>, allows ref struct
 #else
             where TAdditiveIdentity : IEquatable<T>
-            where TPolicy : IModulusFunctions<T>
+            where TPolicy : IRemainderEuclidean<T>
 #endif
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L414
@@ -35,7 +36,7 @@ namespace Ratiocinia.Algorithms.Generic
             {
                 if (identity.Equals(right))
                     return left;
-                (left, right) = (right, policy.Modulus(left, right));
+                (left, right) = (right, policy.RemainderEuclidean(left, right));
             }
         }
     }

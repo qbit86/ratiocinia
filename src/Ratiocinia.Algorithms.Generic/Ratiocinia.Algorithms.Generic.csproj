@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ratiocinia.Abstractions\Ratiocinia.Abstractions.csproj" />
+    <PackageReference Include="MathFoundations.Abstractions" />
   </ItemGroup>
 
 </Project>
