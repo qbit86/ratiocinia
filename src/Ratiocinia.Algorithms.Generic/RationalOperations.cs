@@ -416,11 +416,13 @@ namespace Ratiocinia.Algorithms.Generic
 
                 // Advance to the next continued fraction term: swap numerator with denominator,
                 // and denominator with the remainder (Euclidean algorithm step)
-                var (nextLeftQuotient, nextLeftRemainder) = policy.DivRemTruncated(left.Denominator, left.Remainder);
-                left = new ContinuedFractionState<T>(left.Remainder, nextLeftQuotient, nextLeftRemainder);
+                var (nextLeftQuotient, nextLeftRemainder) =
+                    policy.DivRemTruncated(left.Denominator, left.Remainder);
+                left = new(left.Remainder, nextLeftQuotient, nextLeftRemainder);
 
-                var (nextRightQuotient, nextRightRemainder) = policy.DivRemTruncated(right.Denominator, right.Remainder);
-                right = new ContinuedFractionState<T>(right.Remainder, nextRightQuotient, nextRightRemainder);
+                var (nextRightQuotient, nextRightRemainder) =
+                    policy.DivRemTruncated(right.Denominator, right.Remainder);
+                right = new(right.Remainder, nextRightQuotient, nextRightRemainder);
             }
         }
     }
