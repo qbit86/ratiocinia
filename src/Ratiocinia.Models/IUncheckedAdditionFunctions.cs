@@ -2,6 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IAdd{T}" /> that performs
     /// addition in an unchecked context, allowing silent overflow.

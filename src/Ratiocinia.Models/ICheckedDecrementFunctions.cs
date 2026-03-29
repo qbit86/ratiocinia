@@ -2,6 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IDecrement{T}" /> that performs
     /// decrement in a checked context, throwing <see cref="System.OverflowException" /> on overflow.

@@ -2,6 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IGcd{T}" /> for types
     /// that implement <see cref="INumberBase{TSelf}" />, using the type's <see cref="INumberBase{TSelf}.IsZero(TSelf)" /> method.

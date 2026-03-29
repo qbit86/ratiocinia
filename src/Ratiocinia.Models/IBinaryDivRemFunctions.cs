@@ -2,6 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IDivRemTruncated{T}" /> for binary integer types
     /// using <see cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />.

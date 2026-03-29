@@ -3,6 +3,7 @@ namespace Ratiocinia.Models
     using System;
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IGcd{T}" /> for types
     /// that implement <see cref="IComparable{T}" />, using comparison to determine equality with zero.

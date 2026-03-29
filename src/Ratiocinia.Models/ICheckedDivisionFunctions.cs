@@ -2,6 +2,7 @@ namespace Ratiocinia.Models
 {
     using System.Numerics;
     using MathFoundations;
+
     /// <summary>
     /// Provides a default implementation of <see cref="IDivideTruncated{T}" /> that performs
     /// division in a checked context, throwing <see cref="System.OverflowException" /> on overflow.
