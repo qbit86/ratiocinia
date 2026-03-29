@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <LangVersion Condition="'$(TargetFramework)' == 'net9.0'">13</LangVersion>
+    <RootNamespace>Ratiocinia.Algorithms.Generic.Internal</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathFoundations.Abstractions" />
+  </ItemGroup>
+
+</Project>
