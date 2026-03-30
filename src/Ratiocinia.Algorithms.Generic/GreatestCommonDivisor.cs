@@ -20,14 +20,14 @@ namespace Ratiocinia.Algorithms.Generic
         /// <param name="policy">The policy providing arithmetic operations.</param>
         /// <returns>The greatest common divisor of <paramref name="left" /> and <paramref name="right" />.</returns>
         /// <remarks>This method assumes both <paramref name="left" /> and <paramref name="right" /> are positive.</remarks>
-        public static T EuclideanGcd<T, TAdditiveIdentity, TPolicy>(
+        public static T GcdUnchecked<T, TAdditiveIdentity, TPolicy>(
             T left, T right, TAdditiveIdentity identity, TPolicy policy)
 #if NET9_0_OR_GREATER
             where TAdditiveIdentity : IEquatable<T>, allows ref struct
-            where TPolicy : IRemainderEuclidean<T>, allows ref struct
+            where TPolicy : IRemainderTruncated<T>, allows ref struct
 #else
             where TAdditiveIdentity : IEquatable<T>
-            where TPolicy : IRemainderEuclidean<T>
+            where TPolicy : IRemainderTruncated<T>
 #endif
         {
             // https://github.com/boostorg/rational/blob/boost-1.90.0/include/boost/rational.hpp#L414
@@ -36,7 +36,7 @@ namespace Ratiocinia.Algorithms.Generic
             {
                 if (identity.Equals(right))
                     return left;
-                (left, right) = (right, policy.RemainderEuclidean(left, right));
+                (left, right) = (right, policy.RemainderTruncated(left, right));
             }
         }
     }

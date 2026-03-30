@@ -8,10 +8,10 @@ namespace Ratiocinia.Models
     /// that implement <see cref="IModulusOperators{TSelf,TOther,TResult}" />, using the modulus operator.
     /// </summary>
     /// <typeparam name="T">The numeric type that supports modulus operations.</typeparam>
-    public interface INumericModulusFunctions<T> : IRemainderEuclidean<T>
+    public interface INumericModulusFunctions<T> : IRemainderTruncated<T>
         where T : IModulusOperators<T, T, T>
     {
         /// <inheritdoc />
-        T IRemainderEuclidean<T>.RemainderEuclidean(T left, T right) => left % right;
+        T IRemainderTruncated<T>.RemainderTruncated(T left, T right) => left % right;
     }
 }
