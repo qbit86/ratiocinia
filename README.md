@@ -100,10 +100,8 @@ graph BT
 
 | Project | Description |
 |---------|-------------|
-| **Ratiocinia.Abstractions** | Pure interfaces for math operations |
-| **Ratiocinia.Algorithms.Generic** | Policy-based rational arithmetic algorithms |
 | **Ratiocinia.Models** | Checked/unchecked arithmetic policy implementations |
-| **Ratiocinia.Algorithms.Specialized** | Convenience wrappers using .NET generic math |
+| **Ratiocinia.Algorithms.Specialized** | Rational arithmetic using .NET generic math |
 | **Ratiocinia.Rational** | `Rational<T>` and `BigIntegerRational` structs |
 
 ### Design Principles
