@@ -2,7 +2,7 @@ namespace Ratiocinia.Algorithms.Specialized
 {
     using System;
     using System.Numerics;
-    using Generic;
+    using Generic.Internal;
     using Models;
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IModulusOperators<T, T, T>,
             IMultiplyOperators<T, T, T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Add(
+            RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 CheckedAdditionPolicy<T>.Instance);
 
@@ -54,7 +54,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IModulusOperators<T, T, T>,
             IMultiplyOperators<T, T, T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Divide(
+            RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 T.AdditiveIdentity, CheckedDivisionPolicy<T>.Instance);
 
@@ -76,7 +76,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IModulusOperators<T, T, T>,
             IMultiplyOperators<T, T, T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Multiply(
+            RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 CheckedMultiplyPolicy<T>.Instance);
 
@@ -99,7 +99,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IMultiplyOperators<T, T, T>,
             ISubtractionOperators<T, T, T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Subtract(
+            RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 CheckedSubtractionPolicy<T>.Instance);
 
@@ -112,7 +112,7 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (T Numerator, T Denominator) Negate<T>(T numerator, T denominator)
             where T : IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Negate(
+            RationalOperations.Negate(
                 numerator, denominator, CheckedUnaryNegationPolicy<T>.Instance);
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IAdditiveIdentity<T, T>,
             IComparable<T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Reciprocal(
+            RationalOperations.Reciprocal(
                 numerator, denominator, T.AdditiveIdentity, CheckedUnaryNegationPolicy<T>.Instance);
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IModulusOperators<T, T, T>,
             IMultiplicativeIdentity<T, T>,
             IUnaryNegationOperators<T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Normalize(
+            RationalOperations.Normalize(
                 numerator,
                 denominator,
                 T.AdditiveIdentity,
@@ -172,7 +172,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IDecrementOperators<T>,
             IDivisionOperators<T, T, T>,
             IModulusOperators<T, T, T> =>
-            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.LessThan(
+            RationalOperations.LessThan(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 T.AdditiveIdentity, CheckedLessThanPolicy<T>.Instance);
     }
