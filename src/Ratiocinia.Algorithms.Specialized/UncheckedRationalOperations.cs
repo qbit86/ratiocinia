@@ -2,7 +2,7 @@ namespace Ratiocinia.Algorithms.Specialized
 {
     using System;
     using System.Numerics;
-    using Generic;
+    using Generic.Internal;
     using Models;
 
     /// <summary>
@@ -113,7 +113,8 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (T Numerator, T Denominator) Negate<T>(T numerator, T denominator)
             where T : IUnaryNegationOperators<T, T> =>
-            RationalOperations.Negate(numerator, denominator, UncheckedUnaryNegationPolicy<T>.Instance);
+            RationalOperations.Negate(
+                numerator, denominator, UncheckedUnaryNegationPolicy<T>.Instance);
 
         /// <summary>
         /// Computes the reciprocal (multiplicative inverse) of a rational number without overflow checking.

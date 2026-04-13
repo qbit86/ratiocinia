@@ -1,7 +1,7 @@
 namespace Ratiocinia.Algorithms.Specialized
 {
     using System.Numerics;
-    using Generic;
+    using Generic.Internal;
     using Models;
 
     /// <summary>
@@ -74,7 +74,8 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (BigInteger Numerator, BigInteger Denominator) Negate(
             BigInteger numerator, BigInteger denominator) =>
-            RationalOperations.Negate(numerator, denominator, BigIntegerPolicy.Instance);
+            RationalOperations.Negate(
+                numerator, denominator, BigIntegerPolicy.Instance);
 
         /// <summary>
         /// Normalizes a rational number by reducing it to lowest terms and ensuring the denominator is positive.

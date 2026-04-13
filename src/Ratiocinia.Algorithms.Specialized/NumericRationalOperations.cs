@@ -3,7 +3,7 @@ namespace Ratiocinia.Algorithms.Specialized
     using System;
     using System.Globalization;
     using System.Numerics;
-    using Generic;
+    using Generic.Internal;
     using Models;
 
     /// <summary>

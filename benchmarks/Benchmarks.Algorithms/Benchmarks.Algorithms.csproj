@@ -10,6 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\src\Internal\Ratiocinia.Algorithms.Generic.Internal\RationalOperations.cs">
+      <Link>RationalOperations.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Ratiocinia.Algorithms.Specialized\Ratiocinia.Algorithms.Specialized.csproj" />
   </ItemGroup>
 
