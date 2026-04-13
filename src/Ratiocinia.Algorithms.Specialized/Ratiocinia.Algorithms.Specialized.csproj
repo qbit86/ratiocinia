@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Internal\Ratiocinia.Algorithms.Generic.Internal\Ratiocinia.Algorithms.Generic.Internal.csproj" />
-    <ProjectReference Include="..\Ratiocinia.Algorithms.Generic\Ratiocinia.Algorithms.Generic.csproj" />
     <ProjectReference Include="..\Ratiocinia.Models\Ratiocinia.Models.csproj" />
   </ItemGroup>
 
