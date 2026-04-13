@@ -25,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Internal\Ratiocinia.Algorithms.Generic.Internal\Ratiocinia.Algorithms.Generic.Internal.csproj" />
+    <Compile Include="..\Internal\Ratiocinia.Algorithms.Generic.Internal\GreatestCommonDivisor.cs">
+      <Link>GreatestCommonDivisor.cs</Link>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
