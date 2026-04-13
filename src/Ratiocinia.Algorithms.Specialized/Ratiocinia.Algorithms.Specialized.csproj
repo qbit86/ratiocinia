@@ -15,13 +15,22 @@
     <TargetFrameworks>net7.0;net9.0</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <LangVersion Condition="'$(TargetFramework)' == 'net9.0'">13</LangVersion>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(DebugType)' == 'portable'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedAllSources>true</EmbedAllSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Internal\Ratiocinia.Algorithms.Generic.Internal\Ratiocinia.Algorithms.Generic.Internal.csproj" />
+    <Compile Include="..\Internal\Ratiocinia.Algorithms.Generic.Internal\RationalOperations.cs">
+      <Link>RationalOperations.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Ratiocinia.Models\Ratiocinia.Models.csproj" />
   </ItemGroup>
 
