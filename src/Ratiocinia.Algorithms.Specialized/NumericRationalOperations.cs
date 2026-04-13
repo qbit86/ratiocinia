@@ -23,7 +23,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IModulusOperators<T, T, T>, IMultiplicativeIdentity<T, T>, INumberBase<T>
         {
             var policy = Policy<T>.Instance;
-            return RationalOperations.IsNormalized(
+            return global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.IsNormalized(
                 numerator, denominator, T.AdditiveIdentity, T.MultiplicativeIdentity, policy);
         }
 

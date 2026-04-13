@@ -20,7 +20,7 @@ namespace Ratiocinia.Algorithms.Specialized
         public static (BigInteger Numerator, BigInteger Denominator) Add(
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
-            RationalOperations.Add(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Add(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Ratiocinia.Algorithms.Specialized
         public static (BigInteger Numerator, BigInteger Denominator) Divide(
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
-            RationalOperations.Divide(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Divide(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 BigInteger.Zero, BigIntegerPolicy.Instance);
 
@@ -49,7 +49,7 @@ namespace Ratiocinia.Algorithms.Specialized
         public static (BigInteger Numerator, BigInteger Denominator) Multiply(
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
-            RationalOperations.Multiply(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Multiply(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Ratiocinia.Algorithms.Specialized
         public static (BigInteger Numerator, BigInteger Denominator) Subtract(
             BigInteger leftNumerator, BigInteger leftDenominator, BigInteger rightNumerator,
             BigInteger rightDenominator) =>
-            RationalOperations.Subtract(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Subtract(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator, BigIntegerPolicy.Instance);
 
         /// <summary>
@@ -74,7 +74,8 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <returns>A tuple containing the numerator and denominator of the negated rational number.</returns>
         public static (BigInteger Numerator, BigInteger Denominator) Negate(
             BigInteger numerator, BigInteger denominator) =>
-            RationalOperations.Negate(numerator, denominator, BigIntegerPolicy.Instance);
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Negate(
+                numerator, denominator, BigIntegerPolicy.Instance);
 
         /// <summary>
         /// Normalizes a rational number by reducing it to lowest terms and ensuring the denominator is positive.
@@ -84,7 +85,7 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <returns>A tuple containing the numerator and denominator in normalized form.</returns>
         public static (BigInteger Numerator, BigInteger Denominator) Normalize(
             BigInteger numerator, BigInteger denominator) =>
-            RationalOperations.Normalize(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.Normalize(
                 numerator,
                 denominator,
                 BigInteger.Zero,
@@ -99,7 +100,7 @@ namespace Ratiocinia.Algorithms.Specialized
         /// <param name="denominator">The denominator of the rational number.</param>
         /// <returns><see langword="true" /> if the rational number is normalized; otherwise, <see langword="false" />.</returns>
         public static bool IsNormalized(BigInteger numerator, BigInteger denominator) =>
-            RationalOperations.IsNormalized(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.IsNormalized(
                 numerator, denominator, BigInteger.Zero, BigInteger.One, BigIntegerPolicy.Instance);
 
         /// <summary>
