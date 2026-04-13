@@ -173,7 +173,7 @@ namespace Ratiocinia.Algorithms.Specialized
             IDecrementOperators<T>,
             IDivisionOperators<T, T, T>,
             IModulusOperators<T, T, T> =>
-            RationalOperations.LessThan(
+            global::Ratiocinia.Algorithms.Generic.Internal.RationalOperations.LessThan(
                 leftNumerator, leftDenominator, rightNumerator, rightDenominator,
                 T.AdditiveIdentity, UncheckedLessThanPolicy<T>.Instance);
     }
