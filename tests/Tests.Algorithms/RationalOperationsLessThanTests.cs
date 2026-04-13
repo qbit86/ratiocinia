@@ -1,4 +1,4 @@
-using Ratiocinia.Algorithms.Generic;
+using Ratiocinia.Algorithms.Generic.Internal;
 using Ratiocinia.Models;
 
 namespace Ratiocinia;
